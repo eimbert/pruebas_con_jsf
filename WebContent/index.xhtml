@@ -3,36 +3,66 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<link rel="stylesheet"
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 		crossorigin="anonymous"></link>
-	<title>RichFaces Sample</title>
+	<title>Añadir plantillas al catálogo</title>
 	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
 </h:head>
 
 <h:body>
 	<div class="container">
-		<h:form prependId="false" enctype="multipart/form-data">
-			<div class="form-group">
-				<h:outputLabel value="Name:" for="nameInput" />
-				<h:inputText id="nameInput" class="form-control"
-					value="#{plantilla.name}"></h:inputText>
+		<h1>Cargar plantilla</h1><br />
+		<h:form id="form" enctype="multipart/form-data">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<h:outputLabel value="Nombre plantilla:" for="nameInput"/>
+					<h:inputText id="nameInput" class="form-control" value="#{plantillaBean.nombre}"></h:inputText>
+				</div>
+				<div class="form-group col-md-6">
+					<h:outputLabel value="Modelo:" for="modeloInput"/>
+					<h:inputText id="modeloInput" class="form-control" value="#{plantillaBean.modelo}"></h:inputText>
+				</div>
 			</div>
-			<div class="form-group">
-				<h:outputLabel value="Document:" for="fileName" />
-				<h:inputText id="fileName" class="form-control"
-					value="#{plantilla.fileName}">
-				</h:inputText>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<h:outputLabel value="Versión:" for="versionInput" ></h:outputLabel>
+					<h:inputText id="versionInput" class="form-control" value="#{plantillaBean.version}"></h:inputText>
+				</div>
+				<div class="form-group col-md-6">
+					<h:outputLabel value="Usuario:" for="usuarioInput"></h:outputLabel>
+					<h:inputText id="usuarioInput" class="form-control" value="#{plantillaBean.usuario}"></h:inputText>
+				</div>
+				<div class="form-group col-md-6">
+					<h:outputLabel value="Fecha creación:" for="fechaCreacionInput"></h:outputLabel>
+					<h:inputText id="fechaCreacionInput" class="form-control" value="#{plantillaBean.fechaCreacion}"></h:inputText>
+				</div>
+			
+				<div class="form-group col-md-6">
+					<h:outputLabel value="Fecha validez" for="fechaValidezInput"></h:outputLabel>
+					<h:inputText id="fechaValidezInput" class="form-control" value="#{plantillaBean.fechaValidez}"></h:inputText>
+				</div>	
+			</div>		
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<h:outputLabel value="Selecciona la plantilla para cargar:" for="plantillaUpload"/>
+					<h:inputFile id="plantillaUpload" value="#{plantillaBean.uploadedFile}" />
+				</div>
 			</div>
-
-			<input type="file" name="filename" />
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<h:commandButton value="Upload"  action="#{plantillaController.upload}"></h:commandButton>
+				</div>	
+			</div>
 		</h:form>
-	</div>
+	</div>	
+	
 </h:body>
 
 </html>
+	
+	
