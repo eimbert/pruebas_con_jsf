@@ -42,7 +42,7 @@ public class PlantillaController {
 		this.plantilla = plantilla;
 	}
 	
-	public void upload() throws IOException {
+	public String upload() throws IOException {
 		String nombreDelficheroCompleto = getFileName(plantilla.getUploadedFile());
 		String fichero = plantilla.getUploadedFile().toString();
         nombreDelFichero = nombreDelficheroCompleto.substring(nombreDelficheroCompleto.lastIndexOf("\\")+1, nombreDelficheroCompleto.length());
@@ -55,7 +55,8 @@ public class PlantillaController {
        
         Files.copy(in, copied.toPath());
 		
-        saveData();       
+        saveData();
+        return "ok";
 	}
 	
 	/**
