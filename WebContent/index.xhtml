@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<link rel="stylesheet"
@@ -21,30 +22,30 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<h:outputLabel value="Nombre plantilla:" for="nameInput"/>
-					<h:inputText id="nameInput" class="form-control" value="#{plantillaBean.nombre}"></h:inputText>
+					<p:inputText id="nameInput" class="form-control" value="#{plantillaBean.nombre}" />
 				</div>
 				<div class="form-group col-md-6">
 					<h:outputLabel value="Modelo:" for="modeloInput"/>
-					<h:inputText id="modeloInput" class="form-control" value="#{plantillaBean.modelo}"></h:inputText>
+					<p:inputText id="modeloInput" class="form-control" value="#{plantillaBean.modelo}" />
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<h:outputLabel value="Versión:" for="versionInput" ></h:outputLabel>
-					<h:inputText id="versionInput" class="form-control" value="#{plantillaBean.version}"></h:inputText>
+					<h:outputLabel value="Versión:" for="versionInput" />
+					<p:inputText id="versionInput" class="form-control" value="#{plantillaBean.version}" />
 				</div>
 				<div class="form-group col-md-6">
-					<h:outputLabel value="Usuario:" for="usuarioInput"></h:outputLabel>
-					<h:inputText id="usuarioInput" class="form-control" value="#{plantillaBean.usuario}"></h:inputText>
+					<h:outputLabel value="Usuario:" for="usuarioInput" />
+					<p:inputText id="usuarioInput" class="form-control" value="#{plantillaBean.usuario}" />
 				</div>
 				<div class="form-group col-md-6">
-					<h:outputLabel value="Fecha creación:" for="fechaCreacionInput"></h:outputLabel>
-					<h:inputText id="fechaCreacionInput" class="form-control" value="#{plantillaBean.fechaCreacion}"></h:inputText>
+					<h:outputLabel value="Fecha creación: " for="fechaCreacionInput" />
+        			<p:calendar id="fechaCreacionInput"  value="#{calendarView.date3}" pattern="dd-MM-yyyy" mask="true" showOn="button" />	
 				</div>
 			
 				<div class="form-group col-md-6">
-					<h:outputLabel value="Fecha validez" for="fechaValidezInput"></h:outputLabel>
-					<h:inputText id="fechaValidezInput" class="form-control" value="#{plantillaBean.fechaValidez}"></h:inputText>
+					<h:outputLabel value="Fecha validez:  " for="fechaValidezInput" />
+					<p:calendar id="fechaValidezInput" value="#{plantillaBean.fechaValidez}" pattern="dd-MM-yyyy" mask="true" showOn="button"  />
 				</div>	
 			</div>		
 			<div class="form-row">
@@ -55,7 +56,7 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<h:commandButton value="Upload"  action="#{plantillaController.upload}"></h:commandButton>
+					<h:commandButton value="Upload"  action="#{plantillaController.upload}" />
 				</div>	
 			</div>
 		</h:form>
