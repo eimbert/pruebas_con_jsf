@@ -12,8 +12,6 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
-import com.mc_mutual.utils.Constants;
-
 public class WordTagsFunctions {
 
 	private XWPFDocument document;

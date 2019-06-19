@@ -14,7 +14,6 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBookmark;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
 
-import com.mc_mutual.utils.Constants;
 
 public class WordReplaceFunctions {
 
