@@ -6,7 +6,7 @@ import javax.ejb.Local;
 
 import domain.PlantillaBO;
 
-@Local
+
 public interface PlantillaService {
 	
     public List<PlantillaBO> listarPlantillas();

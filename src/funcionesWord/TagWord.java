@@ -1,11 +1,11 @@
 package funcionesWord;
 
-public class Tag {
+public class TagWord {
 	private String codigoTag;
 	private String tipoCampo;
 	private String textoSolicitud;
 
-	public Tag(String codigoTag, String tipoCampo, String textoSolicitud) {
+	public TagWord(String codigoTag, String tipoCampo, String textoSolicitud) {
 		this.codigoTag = codigoTag;
 		this.tipoCampo = tipoCampo;
 		this.textoSolicitud = textoSolicitud;

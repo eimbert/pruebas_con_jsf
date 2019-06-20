@@ -4,15 +4,15 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.servlet.http.Part;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class PlantillaBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManagedProperty(value = "Documento plantilla")
 	private String nombre;
 	private String modelo;
 	private String version;

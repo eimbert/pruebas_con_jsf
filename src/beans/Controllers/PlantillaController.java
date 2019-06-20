@@ -1,26 +1,21 @@
 package beans.Controllers;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.Date;
-
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
 import beans.PlantillaBean;
-import dao.PlantillaDao;
 import domain.PlantillaBO;
 import servicio.PlantillaService;
+import servicio.TagsSearchFunctions;
+import servicio.TagsSearchFunctionsImpl;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class PlantillaController {
 
 	@ManagedProperty(value="#{plantillaBean}")
@@ -29,8 +24,10 @@ public class PlantillaController {
 	@Inject
 	private PlantillaService plantillaService;
 	
+	//@Inject
+	private TagsSearchFunctions buscarTags = new TagsSearchFunctionsImpl();
 	
-	private String folder = "c:\\uploads";
+	private String folder = "/uploads";
 	private String nombreDelFichero;
 	
 	
@@ -42,20 +39,29 @@ public class PlantillaController {
 		this.plantilla = plantilla;
 	}
 	
-	public String upload() throws IOException {
+	public String upload()  {
 		String nombreDelficheroCompleto = getFileName(plantilla.getUploadedFile());
 		String fichero = plantilla.getUploadedFile().toString();
         nombreDelFichero = nombreDelficheroCompleto.substring(nombreDelficheroCompleto.lastIndexOf("\\")+1, nombreDelficheroCompleto.length());
-        File copied = new File(folder + File.separator + nombreDelFichero);
+        //File copied = new File(folder + File.separator + nombreDelFichero);
         
         String tmp = fichero.substring((fichero.indexOf("StoreLocation")+14));
         int hasta = tmp.indexOf(",");
         tmp = tmp.substring(0, hasta);
-        InputStream in = new BufferedInputStream(new FileInputStream(tmp));
+        //InputStream in = new BufferedInputStream(new FileInputStream(tmp));
        
-        Files.copy(in, copied.toPath());
-		
-        saveData();
+        //Files.copy(in, copied.toPath());
+		//in.close();
+        //saveData();
+
+        try {
+			buscarTags.searchTags(folder, nombreDelFichero);
+			//System.out.println(buscarTags.getTags().toString());
+		} catch (IOException e) {
+			System.out.println("Error " + e);
+			e.printStackTrace();
+		}
+        
         return "ok";
 	}
 	

@@ -35,18 +35,14 @@
 		</plugins>
 	</build>
 
+
 	<dependencies>
 
 		<!-- read and modify word files -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>4.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>4.0.1</version>
+			<version>4.1.0</version>
 		</dependency>
 
 		<!-- convert docx to pdf -->
@@ -61,9 +57,10 @@
 			<version>2.0.2</version>
 		</dependency>
 		<dependency>
-	    <groupId>org.primefaces</groupId>
-	    <artifactId>primefaces</artifactId>
-	    <version>7.0</version>
-</dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>7.0</version>
+		</dependency>
+
 	</dependencies>
 </project>
