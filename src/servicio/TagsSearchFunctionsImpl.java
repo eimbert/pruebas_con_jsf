@@ -5,16 +5,21 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 import domain.WordGetTags;
 import funcionesWord.TagWord;
 
-
+@Stateless
 public class TagsSearchFunctionsImpl implements TagsSearchFunctions {
 
 	WordGetTags wordTags = new WordGetTags();
+			
 	
 	@Override
-	public int searchTags(String path, String name) throws FileNotFoundException, IOException {
+	public int searchTags(String path, String name) throws FileNotFoundException, IOException, InvalidFormatException {
 		wordTags.setInPath(path);
 		wordTags.setDocumentName(name);
 		wordTags.searchTags();

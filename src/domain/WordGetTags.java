@@ -10,8 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.inject.Named;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -22,6 +26,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import funcionesWord.Constants;
 import funcionesWord.TagWord;
 
+
 public class WordGetTags {
 
 	Map<String, List<TagWord>> tags = new HashMap<String, List<TagWord>>();;
@@ -29,7 +34,7 @@ public class WordGetTags {
 	private String documentName;
 	private String inPath;
 
-	public void searchTags() throws FileNotFoundException, IOException {
+	public void searchTags() throws FileNotFoundException, IOException, InvalidFormatException {
 		List<String> etiquetas = new ArrayList<String>();
 
 		openDocument();
@@ -102,15 +107,16 @@ public class WordGetTags {
 		return tags;
 	}
 
-	
 	public WordGetTags() {
 		
 	}
 
-	public void openDocument() throws FileNotFoundException, IOException {
+	public void openDocument() throws FileNotFoundException, IOException, InvalidFormatException {
 		File filename = new File(inPath + File.separator + documentName);
-		InputStream io = new FileInputStream(filename);
-		document = new XWPFDocument(io);
+		InputStream is = new FileInputStream(filename);
+		OPCPackage oPackage = OPCPackage.open(is);
+		document = new XWPFDocument(oPackage);
+		
 	}
 
 	public void closeDocument() throws IOException {

@@ -29,20 +29,21 @@ public class TagPlantillaBO {
 	@Column(name = "texto_pregunta", nullable = false)
 	private String textopregunta;
 
-	@JoinColumn(name = "id_plantilla", referencedColumnName = "id_plantilla")
+	
 	@ManyToOne
-	private PlantillaBO plantilla;
+	private int idPlantilla;
 
 	public TagPlantillaBO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public TagPlantillaBO( String seccion, String tipoDeCampo, String textopregunta) {
+	public TagPlantillaBO( String seccion, String tipoDeCampo, String textopregunta, int plantilla) {
 		super();
 		this.seccion = seccion;
 		this.tipoDeCampo = tipoDeCampo;
 		this.textopregunta = textopregunta;
+		this.idPlantilla = plantilla;
 	}
 
 	public int getIdTagPlantilla() {

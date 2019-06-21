@@ -1,8 +1,10 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,7 +53,7 @@ public class PlantillaBO {
 	@Temporal(TemporalType.DATE)
 	private Date fechaValidez;
 	
-	@OneToMany(mappedBy = "plantilla")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idTagPlantilla")
 	private List<TagPlantillaBO> tagPlantilla;
 
 	public List<TagPlantillaBO> getTagPlantilla() {
@@ -64,7 +66,7 @@ public class PlantillaBO {
 
 	public PlantillaBO() {
 		super();
-		// TODO Auto-generated constructor stub
+		tagPlantilla = new ArrayList<TagPlantillaBO>();
 	}
 
 	public PlantillaBO(String nombre, String modelo, int version, String usuario, Date fechaCreacion, Date fechaValidez) {
@@ -146,6 +148,10 @@ public class PlantillaBO {
 
 	public void setFechaValidez(Date fechaValidez) {
 		this.fechaValidez = fechaValidez;
+	}
+	
+	public void addTagplantilla(TagPlantillaBO tag) {
+		this.tagPlantilla.add(tag);
 	}
 
 }
