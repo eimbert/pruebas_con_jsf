@@ -29,23 +29,13 @@ public class TagPlantillaBO {
 	@Column(name = "texto_pregunta", nullable = false)
 	private String textopregunta;
 
-	
-	@ManyToOne
-	private int idPlantilla;
+	//private PlantillaBO plantilla;
 
 	public TagPlantillaBO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public TagPlantillaBO( String seccion, String tipoDeCampo, String textopregunta, int plantilla) {
-		super();
-		this.seccion = seccion;
-		this.tipoDeCampo = tipoDeCampo;
-		this.textopregunta = textopregunta;
-		this.idPlantilla = plantilla;
-	}
-
 	public int getIdTagPlantilla() {
 		return idTagPlantilla;
 	}
@@ -78,12 +68,6 @@ public class TagPlantillaBO {
 		this.textopregunta = textopregunta;
 	}
 
-	public PlantillaBO getPlantilla() {
-		return plantilla;
-	}
 
-	public void setPlantilla(PlantillaBO plantilla) {
-		this.plantilla = plantilla;
-	}
 
 }

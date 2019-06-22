@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -53,8 +54,9 @@ public class PlantillaBO {
 	@Temporal(TemporalType.DATE)
 	private Date fechaValidez;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idTagPlantilla")
-	private List<TagPlantillaBO> tagPlantilla;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_tags_plantilla")
+	private List<TagPlantillaBO> tagPlantilla  = new ArrayList<TagPlantillaBO>();
 
 	public List<TagPlantillaBO> getTagPlantilla() {
 		return tagPlantilla;
@@ -66,7 +68,7 @@ public class PlantillaBO {
 
 	public PlantillaBO() {
 		super();
-		tagPlantilla = new ArrayList<TagPlantillaBO>();
+		
 	}
 
 	public PlantillaBO(String nombre, String modelo, int version, String usuario, Date fechaCreacion, Date fechaValidez) {

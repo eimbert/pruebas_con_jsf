@@ -91,7 +91,13 @@ public class PlantillaController {
 		datosPlantilla.setNombreDelDocumento(nombreDelFichero);
 		datosPlantilla.setFechaCreacion(new Date());
 			
-		buscarTags.getTags().keySet().forEach((key) -> buscarTags.getTags().get(key).forEach((tag) -> datosPlantilla.addTagplantilla(new TagPlantillaBO(key, tag.getTipoCampo(), tag.getTextoSolicitud(), datosPlantilla.getIdPlantilla()))));
+		buscarTags.getTags().keySet().forEach((key) -> buscarTags.getTags().get(key).forEach((tag) -> {
+			TagPlantillaBO  tagPlantilla = new TagPlantillaBO();
+			tagPlantilla.setSeccion(key);
+			tagPlantilla.setTipoDeCampo(tag.getTipoCampo());
+			tagPlantilla.setTextopregunta(tag.getTextoSolicitud());
+			datosPlantilla.addTagplantilla(tagPlantilla);
+		}));
 		
 		buscarTags.getTags().keySet().forEach((key) -> buscarTags.getTags().get(key).forEach((tag) -> System.out.println("Key: "+ key +" "+ tag.getTipoCampo()+" "+tag.getTextoSolicitud())));
 		
