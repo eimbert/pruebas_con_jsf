@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		crossorigin="anonymous" />
+	<title>Añadir plantillas al catálogo</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+</h:head>
+
+<h:body>
+	<div class="container" >
+		<ui:include src="templates/menu.xhtml">
+		</ui:include>
+		<br /> <br />
+		
+			<h:form >
+				<p:panel id="panel" header="Completar plantilla" style="margin-bottom:10px;">
+					<p:outputLabel for="list" value="Selecciona la plantilla a completar:" />
+					<p:selectOneListbox id="list" value="#{menuController.document}">
+						<f:selectItems value="#{menuController.getPlantillas()}"  var="plantillas" itemLabel="#{plantillas.nombre}" itemValue="#{plantillas.idPlantilla}" /> 
+						<p:ajax event="click"  listener="#{menuController.onDocumentChange}" />
+						<p:ajax event="click"  update="name" />
+						<p:ajax event="click"  update="modelo" />
+						<p:ajax event="click"  update="version" />
+						<p:ajax event="click"  update="usuario" />
+						<p:ajax event="click"  update="fechaCreacion" />
+						<p:ajax event="click"  update="fechaValidez" />
+						
+					</p:selectOneListbox>
+				</p:panel>
+			
+				<p:panel id="panel2" header="Detalles del documento" style="margin-bottom:10px;">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel value="Nombre del documento: " />
+					<p:outputLabel id="name" value="#{menuController.nombre}"/>
+					
+					<p:outputLabel value="Modelo:" />
+					<p:outputLabel id="modelo"  value="#{menuController.modelo}" />
+			
+					<p:outputLabel value="Versión:"  />
+					<p:outputLabel id="version" value="#{menuController.version}" />
+				
+					<p:outputLabel value="Usuario:"  />
+					<p:outputLabel id="usuario"  value="#{menuController.usuario}" />
+				
+					<p:outputLabel value="Fecha creación: "  />
+        			<p:outputLabel id="fechaCreacion"  value="#{menuController.fechaCreacion}" />	
+				
+					<p:outputLabel value="Fecha validez:  "  />
+					<p:outputLabel id="fechaValidez" value="#{menuController.fechaValidez}" />
+				</h:panelGrid>
+				</p:panel>
+				<p:commandButton value="Completar plantilla" ajax="false" action="#{menuController.modificarPlantilla}" />
+			</h:form>
+	</div>
+</h:body>
+</html>

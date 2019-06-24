@@ -7,7 +7,7 @@ import domain.PlantillaBO;
 public interface PlantillaDao {
 	public List<PlantillaBO> findAllPlantillas();
 
-	public PlantillaBO findPlantillaById(PlantillaBO plantilla);
+	public PlantillaBO findPlantillaById(int plantilla);
 
 	public PlantillaBO findPlantillaByName(PlantillaBO plantilla);
 

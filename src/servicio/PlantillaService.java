@@ -11,7 +11,7 @@ public interface PlantillaService {
 	
     public List<PlantillaBO> listarPlantillas();
 
-    public PlantillaBO encontrarPlantillaId(PlantillaBO plantilla);
+    public PlantillaBO encontrarPlantillaId(int plantilla);
 
     public PlantillaBO encontrarPlantillaPorEmail(PlantillaBO plantilla);
 

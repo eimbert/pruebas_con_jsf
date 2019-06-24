@@ -21,14 +21,14 @@ import javax.persistence.TemporalType;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Plantilla.findAll", query = "SELECT p FROM PlantillaBO p ORDER BY p.idPlantilla")
+    @NamedQuery(name = "Plantilla.findAll", query = "SELECT p FROM PlantillaBO p")
    ,@NamedQuery(name = "Plantilla.findByNombre", query = "SELECT p FROM PlantillaBO p WHERE p.nombre = :nombre")})
 @Table(name = "plantillas")
 public class PlantillaBO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_plantilla")
+	@Column(name = "id_plantillas")
 	private int idPlantilla;
 	
 	@Column(name = "nombre", nullable = false)
@@ -58,13 +58,6 @@ public class PlantillaBO {
 	@JoinColumn(name = "id_tags_plantilla")
 	private List<TagPlantillaBO> tagPlantilla  = new ArrayList<TagPlantillaBO>();
 
-	public List<TagPlantillaBO> getTagPlantilla() {
-		return tagPlantilla;
-	}
-
-	public void setTagPlantilla(List<TagPlantillaBO> tagPlantilla) {
-		this.tagPlantilla = tagPlantilla;
-	}
 
 	public PlantillaBO() {
 		super();
@@ -154,6 +147,14 @@ public class PlantillaBO {
 	
 	public void addTagplantilla(TagPlantillaBO tag) {
 		this.tagPlantilla.add(tag);
+	}
+	
+	public List<TagPlantillaBO> getTagPlantilla() {
+		return tagPlantilla;
+	}
+
+	public void setTagPlantilla(List<TagPlantillaBO> tagPlantilla) {
+		this.tagPlantilla = tagPlantilla;
 	}
 
 }

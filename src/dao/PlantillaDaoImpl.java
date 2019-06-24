@@ -21,8 +21,8 @@ public class PlantillaDaoImpl implements PlantillaDao {
 	}
 
 	@Override
-	public PlantillaBO findPlantillaById(PlantillaBO plantilla) {
-		 return em.find(PlantillaBO.class, plantilla.getIdPlantilla());
+	public PlantillaBO findPlantillaById(int plantilla) {
+		 return em.find(PlantillaBO.class, plantilla);
 	}
 
 	@Override

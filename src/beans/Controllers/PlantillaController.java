@@ -100,11 +100,8 @@ public class PlantillaController {
 		}));
 		
 		buscarTags.getTags().keySet().forEach((key) -> buscarTags.getTags().get(key).forEach((tag) -> System.out.println("Key: "+ key +" "+ tag.getTipoCampo()+" "+tag.getTextoSolicitud())));
-		
-		//buscarTags.getTags().keySet().forEach((key) -> System.out.println("Key: "+ key ));
-		
-		
-		
+				
 		plantillaService.registrarPlantilla(datosPlantilla);
 	}
+
 }

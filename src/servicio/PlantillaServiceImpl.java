@@ -17,14 +17,12 @@ public class PlantillaServiceImpl implements PlantillaService {
 	
 	@Override
 	public List<PlantillaBO> listarPlantillas() {
-		// TODO Auto-generated method stub
-		return null;
+		return plantillaDao.findAllPlantillas();
 	}
 
 	@Override
-	public PlantillaBO encontrarPlantillaId(PlantillaBO plantilla) {
-		// TODO Auto-generated method stub
-		return null;
+	public PlantillaBO encontrarPlantillaId(int plantilla) {
+		return plantillaDao.findPlantillaById(plantilla);
 	}
 
 	@Override
