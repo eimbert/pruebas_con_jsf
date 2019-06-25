@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,10 @@ public class TagPlantillaBO {
 	@Column(name = "texto_pregunta", nullable = false)
 	private String textopregunta;
 
-	//private PlantillaBO plantilla;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "id_plantilla", referencedColumnName = "id_plantilla")
+	private PlantillaBO plantilla;
+
 
 	public TagPlantillaBO() {
 		super();
@@ -38,6 +42,14 @@ public class TagPlantillaBO {
 	
 	public int getIdTagPlantilla() {
 		return idTagPlantilla;
+	}
+
+	public PlantillaBO getPlantilla() {
+		return plantilla;
+	}
+
+	public void setPlantilla(PlantillaBO plantilla) {
+		this.plantilla = plantilla;
 	}
 
 	public void setIdTagPlantilla(int idTagPlantilla) {

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class PlantillaBO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_plantillas")
+	@Column(name = "id_plantilla")
 	private int idPlantilla;
 	
 	@Column(name = "nombre", nullable = false)
@@ -54,8 +55,7 @@ public class PlantillaBO {
 	@Temporal(TemporalType.DATE)
 	private Date fechaValidez;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "id_tags_plantilla")
+	@OneToMany(mappedBy="plantilla", cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<TagPlantillaBO> tagPlantilla  = new ArrayList<TagPlantillaBO>();
 
 

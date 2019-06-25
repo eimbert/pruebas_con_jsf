@@ -1,6 +1,8 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -8,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.servlet.http.Part;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class PlantillaBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -17,8 +19,8 @@ public class PlantillaBean implements Serializable {
 	private String modelo;
 	private String version;
 	private String usuario;
-	private String fechaCreacion;
-	private String fechaValidez;
+	private Date fechaCreacion;
+	private Date fechaValidez;
 
 	private Part uploadedFile;
 
@@ -62,19 +64,19 @@ public class PlantillaBean implements Serializable {
 		this.version = version;
 	}
 
-	public String getFechaCreacion() {
+	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
 
-	public void setFechaCreacion(String fechaCreacion) {
+	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public String getFechaValidez() {
+	public Date getFechaValidez() {
 		return fechaValidez;
 	}
 
-	public void setFechaValidez(String fechaValidez) {
+	public void setFechaValidez(Date fechaValidez) {
 		this.fechaValidez = fechaValidez;
 	}
 

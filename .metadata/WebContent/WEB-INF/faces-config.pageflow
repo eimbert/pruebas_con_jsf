@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15609619470160" configfile="/proyecto_jsf/WebContent/WEB-INF/faces-config.xml">
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15609619470160" configfile="/pruebas_con_jsf/WebContent/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="754" id="pf15609621364791" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15612786406920 pf15612813813593 pf15613055571926 pf15613055571937" path="/*"/>
   <nodes xsi:type="pageflow:PFPage" name="new_plantilla.xhtml" x="338" y="178" id="pf15612786406921" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15612786406920" path="/new_plantilla.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="list_plantillas.xhtml" x="338" y="562" id="pf15612813813594" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf15612813813593" path="/list_plantillas.xhtml"/>

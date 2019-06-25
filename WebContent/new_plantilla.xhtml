@@ -23,25 +23,27 @@
 				<h:panelGrid columns="2" cellpadding="5">
 				
 					<p:outputLabel value="Nombre plantilla:" for="nameInput"/>
-					<p:inputText id="nameInput" value="#{plantillaBean.nombre}" required="true"/>
+					<p:inputText id="nameInput" value="#{plantillaBean.nombre}" required="true" style="width: 100% "/>
 				
 					<p:outputLabel value="Modelo:" for="modeloInput"/>
-					<p:inputText id="modeloInput"  value="#{plantillaBean.modelo}" required="true"/>
-			
+					<p:inputText id="modeloInput"  value="#{plantillaBean.modelo}" required="true" style="width: 100% " />
+		
 					<p:outputLabel value="Versión:" for="versionInput" />
-					<p:inputText id="versionInput" value="#{plantillaBean.version}" required="true"/>
+					<p:inputText id="versionInput" value="#{plantillaBean.version}" required="true" style="width: 25% " />
 				
 					<p:outputLabel value="Usuario:" for="usuarioInput" />
-					<p:inputText id="usuarioInput"  value="#{plantillaBean.usuario}" required="true"/>
+					<p:inputText id="usuarioInput"  value="#{plantillaBean.usuario}" required="true" style="width: 100%" />
 				
 					<p:outputLabel value="Fecha creación: " for="fechaCreacionInput" />
-        			<p:calendar id="fechaCreacionInput"  value="#{plantillaBean.fechaCreacion}"   pattern="dd-MM-yyyy" mask="true" required="true"  />	
+        			<p:calendar id="fechaCreacionInput"  value="#{plantillaBean.fechaCreacion}"   pattern="dd-MM-yyyy" mask="true" locale="fr" required="true"  />	
 				
 					<p:outputLabel value="Fecha validez:  " for="fechaValidezInput" />
-					<p:calendar id="fechaValidezInput" value="#{plantillaBean.fechaValidez}" pattern="dd-MM-yyyy" mask="true"  required="true" />
+					<p:calendar id="fechaValidezInput" value="#{plantillaBean.fechaValidez}" pattern="dd-MM-yyyy" mask="true"  locale="fr" required="true" />
 			
 					<p:outputLabel value="Selecciona la plantilla para cargar:" for="plantillaUpload"/>
-					<h:inputFile id="plantillaUpload" value="#{plantillaBean.uploadedFile}" />
+					<h:inputFile id="plantillaUpload" value="#{plantillaBean.uploadedFile}" >
+						<f:validator validatorId="fileUploadValidator"/>
+					</h:inputFile>
 	
 				</h:panelGrid>
 			</p:panel>

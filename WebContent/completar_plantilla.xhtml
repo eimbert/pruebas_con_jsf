@@ -25,7 +25,7 @@
 			<h:form >
 				<p:panel id="panel" header="Completar plantilla" style="margin-bottom:10px;">
 					<p:outputLabel for="list" value="Selecciona la plantilla a completar:" />
-					<p:selectOneListbox id="list" value="#{menuController.document}">
+					<p:selectOneListbox id="list" value="#{menuController.document}" style="width: 100% ">
 						<f:selectItems value="#{menuController.getPlantillas()}"  var="plantillas" itemLabel="#{plantillas.nombre}" itemValue="#{plantillas.idPlantilla}" /> 
 						<p:ajax event="click"  listener="#{menuController.onDocumentChange}" />
 						<p:ajax event="click"  update="name" />
@@ -59,7 +59,7 @@
 					<p:outputLabel id="fechaValidez" value="#{menuController.fechaValidez}" />
 				</h:panelGrid>
 				</p:panel>
-				<p:commandButton value="Completar plantilla" ajax="false" action="#{menuController.modificarPlantilla}" />
+				<p:commandButton value="Completar plantilla" ajax="false" action="#{menuController.optionPlantilla('rellenar')}" />
 			</h:form>
 	</div>
 </h:body>

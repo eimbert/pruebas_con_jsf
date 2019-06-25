@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import beans.PlantillaBean;
@@ -13,6 +15,7 @@ import servicio.PlantillaService;
 
 
 @ManagedBean
+@SessionScoped
 public class MenuController {
 
 	private String nombre;
@@ -21,6 +24,7 @@ public class MenuController {
 	private String usuario;
 	private String fechaCreacion;
 	private String fechaValidez;	
+	
 	private String document;
 	
 	@Inject
@@ -33,8 +37,12 @@ public class MenuController {
 			return "list";
 		else if(opc.equals("completar"))
 			return "completar";
-		else
+		else if(opc.equals("rellenar"))
+			return "rellenar";
+		else if(opc.equals("logout"))
 			return "index";
+		else return "index";
+
 	}
 	
 	public List<PlantillaBO> getPlantillas(){

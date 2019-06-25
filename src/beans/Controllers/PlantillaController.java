@@ -9,9 +9,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
@@ -19,6 +26,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import beans.PlantillaBean;
 import domain.PlantillaBO;
 import domain.TagPlantillaBO;
+import funcionesWord.TagWord;
 import servicio.PlantillaService;
 import servicio.TagsSearchFunctions;
 import servicio.TagsSearchFunctionsImpl;
@@ -26,7 +34,7 @@ import servicio.TagsSearchFunctionsImpl;
 import static java.nio.file.StandardCopyOption.*;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class PlantillaController {
 
 	@ManagedProperty(value = "#{plantillaBean}")
@@ -35,8 +43,8 @@ public class PlantillaController {
 	@Inject
 	private PlantillaService plantillaService;
 
-	//@Inject
-	private TagsSearchFunctions buscarTags = new TagsSearchFunctionsImpl();
+	@Inject
+	private TagsSearchFunctions buscarTags; 
 
 	private String folder = "c:\\uploads";
 	private String nombreDelFichero;
@@ -67,7 +75,7 @@ public class PlantillaController {
 		
 		saveData();
 		
-		return "ok";
+		return "index";
 	}
 
 	/**
@@ -89,19 +97,27 @@ public class PlantillaController {
 		PlantillaBO datosPlantilla = new PlantillaBO();
 		datosPlantilla.setNombre(plantilla.getNombre());
 		datosPlantilla.setNombreDelDocumento(nombreDelFichero);
+		datosPlantilla.setModelo(plantilla.getModelo());
+		datosPlantilla.setUsuario(plantilla.getUsuario());
+		datosPlantilla.setVersion(Integer.parseInt(plantilla.getVersion()));
+		datosPlantilla.setFechaValidez(plantilla.getFechaValidez());
+		
+		
 		datosPlantilla.setFechaCreacion(new Date());
-			
+		
+		//Map<String, List<TagWord>> map = new HashMap<>();
+		//map= buscarTags.getTags(); 
 		buscarTags.getTags().keySet().forEach((key) -> buscarTags.getTags().get(key).forEach((tag) -> {
 			TagPlantillaBO  tagPlantilla = new TagPlantillaBO();
 			tagPlantilla.setSeccion(key);
 			tagPlantilla.setTipoDeCampo(tag.getTipoCampo());
 			tagPlantilla.setTextopregunta(tag.getTextoSolicitud());
+			tagPlantilla.setPlantilla(datosPlantilla);
 			datosPlantilla.addTagplantilla(tagPlantilla);
 		}));
-		
-		buscarTags.getTags().keySet().forEach((key) -> buscarTags.getTags().get(key).forEach((tag) -> System.out.println("Key: "+ key +" "+ tag.getTipoCampo()+" "+tag.getTextoSolicitud())));
-				
+						
 		plantillaService.registrarPlantilla(datosPlantilla);
+
 	}
 
 }
