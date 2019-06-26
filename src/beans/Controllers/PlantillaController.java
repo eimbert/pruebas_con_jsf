@@ -27,9 +27,9 @@ import beans.PlantillaBean;
 import domain.PlantillaBO;
 import domain.TagPlantillaBO;
 import funcionesWord.TagWord;
-import servicio.PlantillaService;
-import servicio.TagsSearchFunctions;
 import servicio.TagsSearchFunctionsImpl;
+import servicio.Interfaces.PlantillaService;
+import servicio.Interfaces.TagsSearchFunctions;
 
 import static java.nio.file.StandardCopyOption.*;
 
@@ -112,6 +112,7 @@ public class PlantillaController {
 			tagPlantilla.setSeccion(key);
 			tagPlantilla.setTipoDeCampo(tag.getTipoCampo());
 			tagPlantilla.setTextopregunta(tag.getTextoSolicitud());
+			tagPlantilla.setCodigoEtiqueta(tag.getCodigoTag());
 			tagPlantilla.setPlantilla(datosPlantilla);
 			datosPlantilla.addTagplantilla(tagPlantilla);
 		}));

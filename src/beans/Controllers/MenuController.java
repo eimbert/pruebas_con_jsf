@@ -10,11 +10,11 @@ import javax.inject.Inject;
 
 import beans.PlantillaBean;
 import domain.PlantillaBO;
-import servicio.PlantillaService;
+import servicio.Interfaces.PlantillaService;
 
 
 
-@ManagedBean
+@ManagedBean(name = "menuController")
 @SessionScoped
 public class MenuController {
 
@@ -31,17 +31,7 @@ public class MenuController {
 	private PlantillaService plantillaService;
 	
 	public String optionPlantilla(String opc) {
-		if(opc.equals("new"))
-			return "new";
-		else if(opc.equals("list"))
-			return "list";
-		else if(opc.equals("completar"))
-			return "completar";
-		else if(opc.equals("rellenar"))
-			return "rellenar";
-		else if(opc.equals("logout"))
-			return "index";
-		else return "index";
+		return opc;
 
 	}
 	

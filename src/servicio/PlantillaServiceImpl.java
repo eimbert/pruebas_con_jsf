@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import dao.PlantillaDao;
 import domain.PlantillaBO;
+import servicio.Interfaces.PlantillaService;
 
 @Stateless
 public class PlantillaServiceImpl implements PlantillaService {
@@ -39,7 +40,7 @@ public class PlantillaServiceImpl implements PlantillaService {
 
 	@Override
 	public void modificarPlantilla(PlantillaBO plantilla) {
-		// TODO Auto-generated method stub
+		plantillaDao.updatePlantilla(plantilla);
 
 	}
 

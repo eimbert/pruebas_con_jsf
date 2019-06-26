@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @Table(name = "tags_plantilla")
 public class TagPlantillaBO {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_tags_plantilla")
@@ -30,18 +29,31 @@ public class TagPlantillaBO {
 	@Column(name = "texto_pregunta", nullable = false)
 	private String textopregunta;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@Column(name = "respuesta")
+	private String respuesta;
+
+	@Column(name = "codigo_etiqueta")
+	private String codigoEtiqueta;
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_plantilla", referencedColumnName = "id_plantilla")
 	private PlantillaBO plantilla;
-
 
 	public TagPlantillaBO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public int getIdTagPlantilla() {
 		return idTagPlantilla;
+	}
+
+	public String getCodigoEtiqueta() {
+		return codigoEtiqueta;
+	}
+
+	public void setCodigoEtiqueta(String codigoEtiqueta) {
+		this.codigoEtiqueta = codigoEtiqueta;
 	}
 
 	public PlantillaBO getPlantilla() {
@@ -80,6 +92,12 @@ public class TagPlantillaBO {
 		this.textopregunta = textopregunta;
 	}
 
+	public String getRespuesta() {
+		return respuesta;
+	}
 
+	public void setRespuesta(String respuesta) {
+		this.respuesta = respuesta;
+	}
 
 }

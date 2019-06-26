@@ -21,25 +21,48 @@
 		<ui:include src="templates/menu.xhtml">
 		</ui:include>
 		<br /> <br />
-		<p:panel id="panel" header="Cumplimentar datos plantilla"
-			style="margin-bottom:10px;">
-
-			<p:dataTable var="tag"
-				value="#{cumplimentarController.getTags(menuController.document)}">
-				<p:column headerText="Seccion">
-					<h:outputText value="#{tag.seccion}" />
-				</p:column>
-
-				<p:column headerText="Pregunta">
+		<p:panel id="panel" header="Cumplimentar datos plantilla" style="margin-bottom:10px;">
+		
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true"/>
+			
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="seccion" value="Filtrar por sección: " />
+	            <p:selectOneMenu id="seccion" value="#{tagsBean.seccion}" style="width:350px">
+	                <p:ajax listener="#{tagsBean.onSeccionChange}" update="tags" />
+	                <f:selectItem itemLabel="Mostrar todas las secciones" itemValue="" noSelectionOption="true" />
+	                <f:selectItems value="#{tagsBean.getSecciones()}" />
+	            </p:selectOneMenu>
+            </h:panelGrid>
+            <p:separator/>
+			<p:dataTable id="tags" var="tag" value="#{tagsBean.getEtiquetas()}" editable="true" >
+				<f:facet name="header">
+            		Campos plantilla
+        		</f:facet>
+        		
+        		<p:ajax event="rowEdit" listener="#{tagsBean.onRowEdit}" update=":form:msgs" />
+        		<p:ajax event="rowEditCancel" listener="#{tagsBean.onRowCancel}" update=":form:msgs" />
+        		<p:ajax event="cellEdit" listener="#{tagsBean.onCellEdit}" update=":form:msgs" />
+        		       		
+				<p:column headerText="Valor del campo">
 					<h:outputText value="#{tag.textopregunta}" />
 				</p:column>
-
+				
 				<p:column headerText="Tipo campo">
-					<h:outputText value="#{tag.tipoDeCampo}" />
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{tag.respuesta}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{tag.respuesta}" style="width:100%" label="Registro" rendered="#{tag.tipoDeCampo == 'text'}" /></f:facet>
+						<f:facet name="input"><p:selectBooleanCheckbox value="#{tag.respuesta}" itemLabel="" label="Registro" rendered="#{tag.tipoDeCampo == 'only_check'}" /></f:facet>						
+						<f:facet name="input"><p:selectBooleanButton  value="#{tag.respuesta}" onLabel="Sí" offLabel="No" style="width:60px" rendered="#{tag.tipoDeCampo == 'y_n'}" /></f:facet>
+	                </p:cellEditor>
 				</p:column>
-
+				
+				<p:column style="width:35px">
+            		<p:rowEditor />
+        		</p:column>
 			</p:dataTable>
-
+		</h:form>
+		
 		</p:panel>
 	</div>
 </h:body>

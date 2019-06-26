@@ -11,6 +11,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import domain.WordGetTags;
 import funcionesWord.TagWord;
+import servicio.Interfaces.TagsSearchFunctions;
 
 @Stateless
 public class TagsSearchFunctionsImpl implements TagsSearchFunctions {

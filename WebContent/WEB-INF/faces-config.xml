@@ -23,6 +23,10 @@
 			<to-view-id>/introducir_valores_plantilla.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>newdocument</from-outcome>
+			<to-view-id>/word_generator.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>index</from-outcome>
 			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
