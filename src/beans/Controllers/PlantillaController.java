@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import funcionesWord.Constants;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -34,7 +34,7 @@ import servicio.Interfaces.TagsSearchFunctions;
 import static java.nio.file.StandardCopyOption.*;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class PlantillaController {
 
 	@ManagedProperty(value = "#{plantillaBean}")
@@ -46,7 +46,6 @@ public class PlantillaController {
 	@Inject
 	private TagsSearchFunctions buscarTags; 
 
-	private String folder = "c:\\uploads";
 	private String nombreDelFichero;
 
 	public PlantillaBean getPlantilla() {
@@ -61,7 +60,7 @@ public class PlantillaController {
 		String nombreDelficheroCompleto = getFileName(plantilla.getUploadedFile());
 		String fichero = plantilla.getUploadedFile().toString();
 		nombreDelFichero = nombreDelficheroCompleto.substring(nombreDelficheroCompleto.lastIndexOf("\\") + 1, nombreDelficheroCompleto.length());
-		File copied = new File(folder + File.separator + nombreDelFichero);
+		File copied = new File(Constants.IN_PATH + File.separator + nombreDelFichero);
 
 		String tmp = fichero.substring((fichero.indexOf("StoreLocation") + 14));
 		int hasta = tmp.indexOf(",");
@@ -71,7 +70,7 @@ public class PlantillaController {
 		Files.copy(in, copied.toPath(), REPLACE_EXISTING);
 		
 
-		buscarTags.searchTags(folder, nombreDelFichero);
+		buscarTags.searchTags(Constants.IN_PATH, nombreDelFichero);
 		
 		saveData();
 		
@@ -99,14 +98,12 @@ public class PlantillaController {
 		datosPlantilla.setNombreDelDocumento(nombreDelFichero);
 		datosPlantilla.setModelo(plantilla.getModelo());
 		datosPlantilla.setUsuario(plantilla.getUsuario());
-		datosPlantilla.setVersion(Integer.parseInt(plantilla.getVersion()));
+		datosPlantilla.setVersion(plantilla.getVersion());
 		datosPlantilla.setFechaValidez(plantilla.getFechaValidez());
 		
 		
 		datosPlantilla.setFechaCreacion(new Date());
 		
-		//Map<String, List<TagWord>> map = new HashMap<>();
-		//map= buscarTags.getTags(); 
 		buscarTags.getTags().keySet().forEach((key) -> buscarTags.getTags().get(key).forEach((tag) -> {
 			TagPlantillaBO  tagPlantilla = new TagPlantillaBO();
 			tagPlantilla.setSeccion(key);

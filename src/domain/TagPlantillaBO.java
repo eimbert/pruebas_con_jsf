@@ -8,9 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "tags_plantilla")
 public class TagPlantillaBO {
@@ -40,64 +43,6 @@ public class TagPlantillaBO {
 	private PlantillaBO plantilla;
 
 	public TagPlantillaBO() {
-		super();
-		// TODO Auto-generated constructor stub
+	
 	}
-
-	public int getIdTagPlantilla() {
-		return idTagPlantilla;
-	}
-
-	public String getCodigoEtiqueta() {
-		return codigoEtiqueta;
-	}
-
-	public void setCodigoEtiqueta(String codigoEtiqueta) {
-		this.codigoEtiqueta = codigoEtiqueta;
-	}
-
-	public PlantillaBO getPlantilla() {
-		return plantilla;
-	}
-
-	public void setPlantilla(PlantillaBO plantilla) {
-		this.plantilla = plantilla;
-	}
-
-	public void setIdTagPlantilla(int idTagPlantilla) {
-		this.idTagPlantilla = idTagPlantilla;
-	}
-
-	public String getSeccion() {
-		return seccion;
-	}
-
-	public void setSeccion(String seccion) {
-		this.seccion = seccion;
-	}
-
-	public String getTipoDeCampo() {
-		return tipoDeCampo;
-	}
-
-	public void setTipoDeCampo(String tipoDeCampo) {
-		this.tipoDeCampo = tipoDeCampo;
-	}
-
-	public String getTextopregunta() {
-		return textopregunta;
-	}
-
-	public void setTextopregunta(String textopregunta) {
-		this.textopregunta = textopregunta;
-	}
-
-	public String getRespuesta() {
-		return respuesta;
-	}
-
-	public void setRespuesta(String respuesta) {
-		this.respuesta = respuesta;
-	}
-
 }

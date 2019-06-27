@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.CellEditEvent;
@@ -19,9 +20,13 @@ import com.tangosol.coherence.component.util.Collections;
 import beans.Controllers.CumplimentarController;
 import beans.Controllers.MenuController;
 import domain.TagPlantillaBO;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class TagsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

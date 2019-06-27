@@ -3,15 +3,12 @@ package domain;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -19,7 +16,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Plantilla.findAll", query = "SELECT p FROM PlantillaBO p")
@@ -39,7 +40,7 @@ public class PlantillaBO {
 	private String modelo;
 	
 	@Column(name = "version", nullable = false)
-	private int version;
+	private String version;
 	
 	@Column(name = "nombre_del_documento", nullable = false)
 	private String nombreDelDocumento;
@@ -55,7 +56,10 @@ public class PlantillaBO {
 	@Temporal(TemporalType.DATE)
 	private Date fechaValidez;
 	
-	@OneToMany(mappedBy="plantilla", cascade = CascadeType.ALL, orphanRemoval = true )
+	@Column(name = "validada")
+	private int validada;
+	
+	@OneToMany(mappedBy="plantilla", cascade = CascadeType.ALL)
 	private List<TagPlantillaBO> tagPlantilla  = new ArrayList<TagPlantillaBO>();
 
 
@@ -64,7 +68,7 @@ public class PlantillaBO {
 		
 	}
 
-	public PlantillaBO(String nombre, String modelo, int version, String usuario, Date fechaCreacion, Date fechaValidez) {
+	public PlantillaBO(String nombre, String modelo, String version, String usuario, Date fechaCreacion, Date fechaValidez) {
 		super();
 		this.nombre = nombre;
 		this.modelo = modelo;
@@ -74,87 +78,12 @@ public class PlantillaBO {
 		this.fechaValidez = fechaValidez;
 	}
 	
-	
-
 	public PlantillaBO(String nombre) {
 		super();
 		this.nombre = nombre;
 	}
 
-	public int getIdPlantilla() {
-		return idPlantilla;
-	}
-
-	public void setIdPlantilla(int idPlantilla) {
-		this.idPlantilla = idPlantilla;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public String getNombreDelDocumento() {
-		return nombreDelDocumento;
-	}
-
-	public void setNombreDelDocumento(String nombreDelDocumento) {
-		this.nombreDelDocumento = nombreDelDocumento;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public Date getFechaCreacion() {
-		return fechaCreacion;
-	}
-
-	public void setFechaCreacion(Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
-
-	public Date getFechaValidez() {
-		return fechaValidez;
-	}
-
-	public void setFechaValidez(Date fechaValidez) {
-		this.fechaValidez = fechaValidez;
-	}
-	
 	public void addTagplantilla(TagPlantillaBO tag) {
 		this.tagPlantilla.add(tag);
 	}
-	
-	public List<TagPlantillaBO> getTagPlantilla() {
-		return tagPlantilla;
-	}
-
-	public void setTagPlantilla(List<TagPlantillaBO> tagPlantilla) {
-		this.tagPlantilla = tagPlantilla;
-	}
-
 }

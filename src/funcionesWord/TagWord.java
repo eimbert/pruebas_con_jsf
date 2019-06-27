@@ -1,5 +1,10 @@
 package funcionesWord;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class TagWord {
 	private String codigoTag;
 	private String tipoCampo;
@@ -12,37 +17,4 @@ public class TagWord {
 		this.textoSolicitud = textoSolicitud;
 		this.respuesta = "";
 	}
-
-	public String getCodigoTag() {
-		return codigoTag;
-	}
-
-	public void setCodigoTag(String codigoTag) {
-		this.codigoTag = codigoTag;
-	}
-
-	public String getTipoCampo() {
-		return tipoCampo;
-	}
-
-	public void setTipoCampo(String tipoCampo) {
-		this.tipoCampo = tipoCampo;
-	}
-
-	public String getTextoSolicitud() {
-		return textoSolicitud;
-	}
-
-	public void setTextoSolicitud(String textoSolicitud) {
-		this.textoSolicitud = textoSolicitud;
-	}
-
-	public String getRespuesta() {
-		return respuesta;
-	}
-
-	public void setRespuesta(String respuesta) {
-		this.respuesta = respuesta;
-	}
-
 }
