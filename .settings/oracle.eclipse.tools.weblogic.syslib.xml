@@ -4,5 +4,5 @@
     <library path="server/lib/wls-api.jar"/>
     <library path="%ORACLE_COMMON_MODULES_DIR%/javax.persistence.jar"/>
     <library path="%ORACLE_COMMON_MODULES_DIR%/oracle.toplink/eclipselink.jar"/>
-    <library path="modules/glassfish.jsf.jar"/>
+    <library path="modules/com.oracle.weblogic.servlet.jar"/>
 </system-libraries>

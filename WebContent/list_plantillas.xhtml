@@ -24,20 +24,22 @@
 		<h:form id="form">
 			<p:growl id="msgs" showDetail="true"/>
 			<p:panel id="panel" header="Listado plantillas" style="margin-bottom:10px;">
-				<p:dataTable id="plantillas" var="plantilla" value="#{plantillaBean.plantillas}" editable="true">
+			
+				<p:dataTable id="plt" var="plantilla" value="#{plantillaBean.getPlantillas()}" editable="true" >
 
 					<p:ajax event="rowEdit" listener="#{plantillaBean.onRowEdit}" update=":form:msgs" />
         			<p:ajax event="rowEditCancel" listener="#{plantillaBean.onRowCancel}" update=":form:msgs" />
         			<p:ajax event="cellEdit" listener="#{plantillaBean.onCellEdit}" update=":form:msgs" />
-				
-					<p:column headerText="Nombre" sortBy="#{plantilla.nombre}" style="text-align: left; width:25%;" >
+					<p:ajax event="sort" skipChildren="false" />
+					
+					<p:column headerText="Nombre" sortBy="#{plantilla.nombre}" style="text-align: left; width:24%;" >
 						<p:cellEditor>
 							<f:facet name="output"><h:outputText value="#{plantilla.nombre}" /></f:facet>
-							<f:facet name="intput"><p:inputText value="#{plantilla.nombre}" style="width:100%" label="Registro"/></f:facet>
+							<f:facet name="input"><p:inputText value="#{plantilla.nombre}" style="width:100%" /></f:facet>
 						</p:cellEditor>
 					</p:column>
 					
-					<p:column headerText="Modelo" sortBy="#{plantilla.modelo}" style="text-align: left; width:10%;" >
+					<p:column headerText="Modelo" sortBy="#{plantilla.modelo}" style="text-align: left; width:18%;" >
 						<h:outputText value="#{plantilla.modelo}" />
 					</p:column>
 					
@@ -65,7 +67,7 @@
 						<p:selectBooleanCheckbox value="#{plantillaBean.getValidacion(plantilla.validada)}" itemLabel="" disabled = "true" />
 					</p:column>
 					
-					<p:column style="width:10%">
+					<p:column style="width:3%">
 	            		<p:rowEditor />
 	        		</p:column>
 				</p:dataTable>

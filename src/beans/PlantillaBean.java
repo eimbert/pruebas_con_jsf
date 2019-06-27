@@ -3,25 +3,16 @@ package beans;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
-
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
-
-import beans.Controllers.CumplimentarController;
-import beans.Controllers.MenuController;
 import domain.PlantillaBO;
-import domain.TagPlantillaBO;
 import lombok.Getter;
 import lombok.Setter;
 import servicio.Interfaces.PlantillaService;
@@ -81,4 +72,5 @@ public class PlantillaBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
+	
 }

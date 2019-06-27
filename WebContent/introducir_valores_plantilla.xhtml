@@ -44,11 +44,11 @@
         		<p:ajax event="rowEditCancel" listener="#{tagsBean.onRowCancel}" update=":form:msgs" />
         		<p:ajax event="cellEdit" listener="#{tagsBean.onCellEdit}" update=":form:msgs" />
         		       		
-				<p:column headerText="Valor del campo">
+				<p:column headerText="Valor del campo" sortBy="#{tag.textopregunta}">
 					<h:outputText value="#{tag.textopregunta}" />
 				</p:column>
 				
-				<p:column headerText="Tipo campo">
+				<p:column headerText="Tipo campo" >
 					<p:cellEditor>
 						<f:facet name="output"><h:outputText value="#{tag.respuesta}" /></f:facet>
 						<f:facet name="input"><p:inputText value="#{tag.respuesta}" style="width:100%" label="Registro" rendered="#{tag.tipoDeCampo == 'text'}" /></f:facet>

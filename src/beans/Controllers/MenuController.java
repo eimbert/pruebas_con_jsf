@@ -10,10 +10,13 @@ import javax.inject.Inject;
 
 import beans.PlantillaBean;
 import domain.PlantillaBO;
+import lombok.Getter;
+import lombok.Setter;
 import servicio.Interfaces.PlantillaService;
 
 
-
+@Getter
+@Setter
 @ManagedBean(name = "menuController")
 @SessionScoped
 public class MenuController {
@@ -51,71 +54,7 @@ public class MenuController {
 	
 	public void modificarPlantilla() {
 		
+		
 	}
-
-	public String getDocument() {
-		return document;
-	}
-
-	public void setDocument(String document) {
-		this.document = document;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-
-	public String getVersion() {
-		return version;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public String getFechaCreacion() {
-		return fechaCreacion;
-	}
-
-	public void setFechaCreacion(String fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
-
-	public String getFechaValidez() {
-		return fechaValidez;
-	}
-
-	public void setFechaValidez(String fechaValidez) {
-		this.fechaValidez = fechaValidez;
-	}
-
-	public PlantillaService getPlantillaService() {
-		return plantillaService;
-	}
-
-	public void setPlantillaService(PlantillaService plantillaService) {
-		this.plantillaService = plantillaService;
-	}
-	
 
 }
