@@ -24,7 +24,7 @@
 		
 			<h:form >
 				<p:panel id="panel" header="Completar plantilla" style="margin-bottom:10px;">
-					<p:outputLabel for="list" value="Selecciona la plantilla a completar:" />
+					<p:outputLabel for="list" value="Selecciona la plantilla a rellenar:" />
 					<p:selectOneListbox id="list" value="#{menuController.document}" style="width: 100% ">
 						<f:selectItems value="#{menuController.getPlantillas()}"  var="plantillas" itemLabel="#{plantillas.nombre}" itemValue="#{plantillas.idPlantilla}" /> 
 						<p:ajax event="click"  listener="#{menuController.onDocumentChange}" />

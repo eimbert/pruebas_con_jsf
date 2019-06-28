@@ -72,8 +72,8 @@ public class TagsBean implements Serializable {
 	}
 
 	public void onRowCancel(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Edición cancelada");// , ((PlantillaBO)
-																	// event.getObject()).getIdPlantilla());
+		FacesMessage msg = new FacesMessage("Edición cancelada");
+																	
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 

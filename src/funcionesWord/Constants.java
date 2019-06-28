@@ -8,7 +8,7 @@ public class Constants {
     public static final String TEST_DOCUMENT_NAME = "docx/ReplaceTextTest.docx";
     
     public static final String IN_PATH = "c:\\uploads";
-    public static final String OUT_PATH = "c:\\uploads\\gestionados";
+    public static final String OUT_PATH = "c:\\uploads\\generados";
     		
     public static final String CODIGO_INICIO = "#{";
     public static final String CODIGO_FINAL = "}#";

@@ -21,7 +21,7 @@
 	
 	<h:form >
 		<p:panel id="panel" header="Generar documento Word" style="margin-bottom:10px;">
-			<p:outputLabel for="list" value="Selecciona la plantilla a completar:" />
+			<p:outputLabel for="list" value="Selecciona la plantilla a partir de la cual quieres generar un nuevo documento:" />
 			<p:selectOneListbox id="list" value="#{menuController.document}" style="width: 100% ">
 				<f:selectItems value="#{menuController.getPlantillas()}"  var="plantillas" itemLabel="#{plantillas.nombre}" itemValue="#{plantillas.idPlantilla}" /> 
 				<p:ajax event="click"  listener="#{menuController.onDocumentChange}" />

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15609619470160" configfile="/pruebas_con_jsf/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="946" id="pf15609621364791" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15612786406920 pf15612813813593 pf15613055571926 pf15613055571937 pf15615651403500 pf15615651403501" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="946" id="pf15609621364791" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15612786406920 pf15612813813593 pf15613055571926 pf15613055571937 pf15615651403500 pf15615651403501 pf15617242041750" path="/*"/>
   <nodes xsi:type="pageflow:PFPage" name="new_plantilla.xhtml" x="338" y="178" id="pf15612786406921" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15612786406920" path="/new_plantilla.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="list_plantillas.xhtml" x="338" y="562" id="pf15612813813594" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf15612813813593" path="/list_plantillas.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="ompletar_plantilla.xhtml" x="338" y="946" id="pf15613055571938" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf15613055571926" path="/completar_plantilla.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="1330" id="pf15613055571939" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf15613055571937" path="/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="introducir_valores_plantilla.xhtml" x="338" y="1714" id="pf15615651403512" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf15615651403500" path="/introducir_valores_plantilla.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="word_generator.xhtml" id="pf15615651403513" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf15615651403501" path="/word_generator.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="1330" id="pf15613055571939" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf15613055571937" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="introducir_valores_plantilla.xhtml" x="338" y="1714" id="pf15615651403512" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf15615651403500" path="/introducir_valores_plantilla.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="word_generator.xhtml" id="pf15615651403513" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf15615651403501" path="/word_generator.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="documentos_generados.xhtml" id="pf15617242041761" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf15617242041750" path="/documentos_generados.xhtml"/>
   <links id="pf15612786406920" target="pf15612786406921" source="pf15609621364791" outcome="new"/>
   <links id="pf15612813813593" target="pf15612813813594" source="pf15609621364791" outcome="list"/>
   <links id="pf15613055571926" target="pf15613055571938" source="pf15609621364791" outcome="completar"/>
   <links id="pf15613055571937" target="pf15613055571939" source="pf15609621364791" outcome="index"/>
   <links id="pf15615651403500" target="pf15615651403512" source="pf15609621364791" outcome="rellenar"/>
   <links id="pf15615651403501" target="pf15615651403513" source="pf15609621364791" outcome="newdocument"/>
+  <links id="pf15617242041750" target="pf15617242041761" source="pf15609621364791" outcome="listarDocumentos"/>
 </pageflow:Pageflow>

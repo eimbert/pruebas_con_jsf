@@ -25,11 +25,11 @@
 			<p:growl id="msgs" showDetail="true"/>
 			<p:panel id="panel" header="Listado plantillas" style="margin-bottom:10px;">
 			
-				<p:dataTable id="plt" var="plantilla" value="#{plantillaBean.getPlantillas()}" editable="true" >
+				<p:dataTable id="plt" var="plantilla" value="#{listBean.plantillas}" editable="true" >
 
-					<p:ajax event="rowEdit" listener="#{plantillaBean.onRowEdit}" update=":form:msgs" />
-        			<p:ajax event="rowEditCancel" listener="#{plantillaBean.onRowCancel}" update=":form:msgs" />
-        			<p:ajax event="cellEdit" listener="#{plantillaBean.onCellEdit}" update=":form:msgs" />
+					<p:ajax event="rowEdit" listener="#{listBean.onRowEdit}" update=":form:msgs" />
+        			<p:ajax event="rowEditCancel" listener="#{listBean.onRowCancel}" update=":form:msgs" />
+        			<p:ajax event="cellEdit" listener="#{listBean.onCellEdit}" update=":form:msgs" />
 					<p:ajax event="sort" skipChildren="false" />
 					
 					<p:column headerText="Nombre" sortBy="#{plantilla.nombre}" style="text-align: left; width:24%;" >
@@ -40,31 +40,45 @@
 					</p:column>
 					
 					<p:column headerText="Modelo" sortBy="#{plantilla.modelo}" style="text-align: left; width:18%;" >
-						<h:outputText value="#{plantilla.modelo}" />
+						<p:cellEditor>
+							<f:facet name="output"><h:outputText value="#{plantilla.modelo}" /></f:facet>
+							<f:facet name="input"><p:inputText value="#{plantilla.modelo}" style="width:98%" /></f:facet>
+						</p:cellEditor>
 					</p:column>
 					
 					<p:column headerText="Version" style="text-align: center; width:7%;">
-						<h:outputText value="#{plantilla.version}" />
+						<p:cellEditor>
+							<f:facet name="output"><h:outputText value="#{plantilla.version}" /></f:facet>
+							<f:facet name="input"><p:inputText value="#{plantilla.version}" style="width:98%" /></f:facet>
+						</p:cellEditor>
 					</p:column>
 					
 					<p:column headerText="Fecha creación" sortBy="#{plantilla.fechaCreacion}" style="text-align: center; width:14%;">
-						<h:outputText value="#{plantilla.fechaCreacion}" >
-							<f:convertDateTime pattern="dd-MM-yyyy" />
-						</h:outputText>
+						<p:cellEditor>
+							<f:facet name="output"><h:outputText value="#{plantilla.fechaCreacion}" ><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText></f:facet>
+							<f:facet name="input"><p:calendar value="#{plantilla.fechaCreacion}" pattern="dd-MM-yyyy" mask="true" /></f:facet>
+						</p:cellEditor>
 					</p:column>
 					
 					<p:column headerText="Fecha vigencia" sortBy="#{plantilla.fechaValidez}" style="text-align: center; width:14%;">
-						<h:outputText value="#{plantilla.fechaValidez}" >
-							<f:convertDateTime pattern="dd-MM-yyyy" />
-						</h:outputText>
+						<p:cellEditor>
+							<f:facet name="output"><h:outputText value="#{plantilla.fechaValidez}" ><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText></f:facet>
+							<f:facet name="input"><p:calendar value="#{plantilla.fechaValidez}" pattern="dd-MM-yyyy" mask="true" /></f:facet>
+						</p:cellEditor>
 					</p:column>
 					
 					<p:column headerText="Usuario" sortBy="#{plantilla.usuario}" style="text-align: left; width:10%;">
-						<h:outputText value="#{plantilla.usuario}" />
+						<p:cellEditor>
+							<f:facet name="output"><h:outputText value="#{plantilla.usuario}"  /></f:facet>
+							<f:facet name="input"><p:inputText value="#{plantilla.usuario}"  style="width:98%" /></f:facet>
+						</p:cellEditor>
 					</p:column>
 					
 					<p:column headerText="Validada" sortBy="#{plantilla.validada}" style="text-align: center; width:10%;">
-						<p:selectBooleanCheckbox value="#{plantillaBean.getValidacion(plantilla.validada)}" itemLabel="" disabled = "true" />
+						<p:cellEditor>
+							<f:facet name="output"><h:outputText value="#{listBean.booleanToString(plantilla.validada)}" /></f:facet>
+							<f:facet name="input"><p:selectBooleanButton  value="#{plantilla.validada}" onLabel="Sí" offLabel="No" style="width:60px" /></f:facet>
+						</p:cellEditor>
 					</p:column>
 					
 					<p:column style="width:3%">

@@ -57,7 +57,7 @@ public class PlantillaBO {
 	private Date fechaValidez;
 	
 	@Column(name = "validada")
-	private int validada;
+	private String validada;
 	
 	@OneToMany(mappedBy="plantilla", cascade = CascadeType.ALL)
 	private List<TagPlantillaBO> tagPlantilla  = new ArrayList<TagPlantillaBO>();

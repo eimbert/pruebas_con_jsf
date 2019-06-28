@@ -27,6 +27,10 @@
 			<to-view-id>/word_generator.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>listarDocumentos</from-outcome>
+			<to-view-id>/documentos_generados.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>index</from-outcome>
 			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>

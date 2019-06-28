@@ -99,6 +99,7 @@ public class PlantillaController {
 		datosPlantilla.setModelo(plantilla.getModelo());
 		datosPlantilla.setUsuario(plantilla.getUsuario());
 		datosPlantilla.setVersion(plantilla.getVersion());
+		datosPlantilla.setValidada("false");
 		datosPlantilla.setFechaValidez(plantilla.getFechaValidez());
 		
 		
