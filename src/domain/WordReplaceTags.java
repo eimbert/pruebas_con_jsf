@@ -1,18 +1,29 @@
 package domain;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
+
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-import funcionesWord.Constants;
+import fr.opensagres.xdocreport.converter.Options;
+import fr.opensagres.xdocreport.converter.XDocConverterException;
+import fr.opensagres.poi.xwpf.converter.core.XWPFConverterException;
+import fr.opensagres.poi.xwpf.converter.pdf.PdfConverter;
+import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
+import fr.opensagres.xdocreport.converter.ConverterRegistry;
 
+import fr.opensagres.xdocreport.core.document.DocumentKind;
+import funcionesWord.Constants;
 
 public class WordReplaceTags {
 
@@ -22,7 +33,7 @@ public class WordReplaceTags {
 
 	public void replaceTags(List<TagPlantillaBO> tags) throws FileNotFoundException, IOException {
 		openDocument();
-		
+
 		tags.forEach(object -> {
 			replaceTagsFormat(object);
 			replaceTextInTables(object);
@@ -30,8 +41,8 @@ public class WordReplaceTags {
 		saveDocument();
 		closeDocument();
 	}
-	
-	public void replaceTagsFormat(TagPlantillaBO tag)  {
+
+	public void replaceTagsFormat(TagPlantillaBO tag) {
 		String subTag = "";
 
 		for (XWPFParagraph p : document.getParagraphs()) {
@@ -45,9 +56,9 @@ public class WordReplaceTags {
 		}
 	}
 
-	public void replaceTextInTables(TagPlantillaBO tag)  {
+	public void replaceTextInTables(TagPlantillaBO tag) {
 		String subTag = "";
-		
+
 		for (XWPFTable tbl : document.getTables()) {
 			for (XWPFTableRow row : tbl.getRows()) {
 				for (XWPFTableCell cell : row.getTableCells()) {
@@ -62,7 +73,6 @@ public class WordReplaceTags {
 		}
 	}
 
-
 	private String concatenandoRuns(String txt, TagPlantillaBO tag, String subTag, XWPFRun r) {
 		if (txt != null && txt.contains(Constants.CODIGO_INICIO) || !subTag.equals("")) {
 			int inicio = txt.indexOf(Constants.CODIGO_INICIO);
@@ -70,18 +80,18 @@ public class WordReplaceTags {
 			if (fin > inicio && fin > 0 && inicio >= 0) {
 				if (tag.getCodigoEtiqueta().equals(txt)) {
 					r.setText("", 0); // Elimino el texto con el código de la etiqueta del documento.
-					typeFieldResponse(tag.getRespuesta(),r, tag.getTipoDeCampo());
+					typeFieldResponse(tag.getRespuesta(), r, tag.getTipoDeCampo());
 					return "";
 				}
 			} else {
 				subTag += txt;
-				if ((txt.contains(Constants.CODIGO_FINAL) || txt.contains(Constants.CODIGO_CONTROL)) && 
-								  !txt.contains(Constants.CODIGO_INICIO)) {
-					r.setText("", 0); //Borro el último caracter 
+				if ((txt.contains(Constants.CODIGO_FINAL) || txt.contains(Constants.CODIGO_CONTROL))
+						&& !txt.contains(Constants.CODIGO_INICIO)) {
+					r.setText("", 0); // Borro el último caracter
 					if (tag.getCodigoEtiqueta().trim().equals(subTag.trim())) {
-						typeFieldResponse(tag.getRespuesta(),r, tag.getTipoDeCampo());
-					}else {
-						r.setText(subTag, 0); //Pongo la etiqueta original porque no es la que buscaba
+						typeFieldResponse(tag.getRespuesta(), r, tag.getTipoDeCampo());
+					} else {
+						r.setText(subTag, 0); // Pongo la etiqueta original porque no es la que buscaba
 					}
 					return "";
 				} else {
@@ -94,20 +104,21 @@ public class WordReplaceTags {
 
 	private void typeFieldResponse(String str, XWPFRun r, String typeField) {
 		r.setFontSize(11);
-		switch(typeField) {
-			case "text":
-				r.setText(str);
-				return;
-			case "only_check":
-				r.setText("[  ]");
-				return;
-			case "y_n":
-				r.setText("Si [  ]  No [  ]");
-				return;
+		switch (typeField) {
+		case "text":
+			r.setText(str);
+			return;
+		case "only_check":
+			r.setText("[  ]");
+			return;
+		case "y_n":
+			r.setText("Si [  ]  No [  ]");
+			return;
 		}
-		//r.addCarriageReturn();
+		// r.addCarriageReturn();
 	}
 	
+
 	public void setInPath(String inPath) {
 		this.inPath = inPath;
 	}

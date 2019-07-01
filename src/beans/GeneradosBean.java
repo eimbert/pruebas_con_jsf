@@ -1,5 +1,7 @@
 package beans;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,9 +11,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import funcionesWord.Constants;
 import domain.Documento;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,10 +38,14 @@ public class GeneradosBean implements Serializable {
 	private DocumentoService documentoService;
 	
 	private List<Documento> documentos;
+	private Documento selectedDcoumento;
+	private String realPath;
 
 	@PostConstruct
     public void init() {
 		documentos = documentoService.listarDocumentos();
+		realPath=null;
+		
 	}
 
 	public String booleanToString(Boolean valor){
@@ -54,15 +66,17 @@ public class GeneradosBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
-	public void onCellEdit(CellEditEvent event) {
-		Object oldValue = event.getOldValue();
-		Object newValue = event.getNewValue();
-
-		if (newValue != null && !newValue.equals(oldValue)) {
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
-					"Old: " + oldValue + ", New:" + newValue);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-		}
-	}
-	
+    public void onRowSelect(SelectEvent event) throws FileNotFoundException {
+    	String documento = ((Documento) event.getObject()).getNombre();
+    	documento = documento.replace("docx", "pdf");
+    	realPath = Constants.OUT_PATH_PDF + documento;
+        FacesMessage msg = new FacesMessage("Document Selected", ((Documento) event.getObject()).getNombre());
+        FacesContext.getCurrentInstance().addMessage(null, msg);        
+    }
+ 
+    public void onRowUnselect(UnselectEvent event) {
+        FacesMessage msg = new FacesMessage("Document Unselected", ((Documento) event.getObject()).getNombre());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
 }
