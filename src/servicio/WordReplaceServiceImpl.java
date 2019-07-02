@@ -24,14 +24,11 @@ public class WordReplaceServiceImpl implements WordReplaceService {
 
 	@Override
 	public int replaceTags(String inPath, String outPath, String name, List<TagPlantillaBO> tags) throws FileNotFoundException, IOException {
-		ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 		
 		wordReplace.setInPath(inPath);
 		wordReplace.setOutPath(outPath);
 		wordReplace.setDocumentName(name);
 		wordReplace.replaceTags(tags);
-
-		ToPDF.toPdf(inPath + "\\" + name, servletContext.getRealPath("/")+Constants.OUT_PATH_PDF+name);
 		
 		return 0;
 	}

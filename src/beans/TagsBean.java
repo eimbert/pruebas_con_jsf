@@ -99,4 +99,8 @@ public class TagsBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
+	
+	public String getTextoAyuda() {
+		return "El incumplimiento de las prescripciones establecidas en el presente Pliego y en el Pliego de Prescripciones Técnicas, tanto en lo relativo a los requerimientos generales como en los requisitos técnicos, supondrá la exclusión de la oferta del proceso de valoración.";
+	}
 }

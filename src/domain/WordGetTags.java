@@ -61,8 +61,18 @@ public class WordGetTags {
 	}
 
 	public List<String> SearchTagsInText(List<String> tags) {
+		String parrafo = "";
+		Boolean guardarTextoParrafo = false;
 		for (XWPFParagraph p : document.getParagraphs()) {
 			String txt = p.getParagraphText();
+			if ((txt != null && txt.contains(Constants.CODIGO_INICIO_PARRAFO)) || guardarTextoParrafo ) {
+				guardarTextoParrafo = true;
+				parrafo += txt;
+			}
+			if (txt != null && txt.contains(Constants.CODIGO_FIN_PARRAFO)) {
+				guardarTextoParrafo = false;
+				parrafo = ""; //aqui hay que guardalo
+			}
 			if (txt != null && txt.contains(Constants.CODIGO_INICIO)) {
 				int inicio = txt.indexOf(Constants.CODIGO_INICIO);
 				int fin = txt.indexOf(Constants.CODIGO_FINAL, inicio);

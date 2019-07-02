@@ -37,6 +37,9 @@ public class TagPlantillaBO {
 
 	@Column(name = "codigo_etiqueta")
 	private String codigoEtiqueta;
+	
+	@Column(name = "texto_ayuda")
+	private String textoAyuda;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_plantilla", referencedColumnName = "id_plantilla")

@@ -8,20 +8,20 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:form>
 	<p:growl id="messages" />
-	<p:menubar>
-		<p:submenu label="Opciones Plantillas" icon="pi pi-file">
+	<p:menubar >
+		<p:submenu label="Opciones Plantillas" >
 			<p:menuitem value="Acceder al catálogo de plantillas" action="#{menuController.optionPlantilla('list')}"/>
 			<p:menuitem value="Añadir plantilla al catálogo" action="#{menuController.optionPlantilla('new')}" />
 			<p:menuitem value="Seguimiento de una plantilla" action="#{menuController.optionPlantilla('segumientoPlantilla')}" />
 			
 		</p:submenu>
-		<p:submenu label="Opciones Documentos" icon="pi pi-pencil">
+		<p:submenu label="Opciones Documentos" >
 			<p:menuitem value="Cumplimentar plantilla" action="#{menuController.optionPlantilla('completar')}" />
 			<p:menuitem value="Enviar documento a validación" action="#{menuController.optionPlantilla('envioValidar')}" /> 
 			<p:menuitem value="Seguimiento de un documento" action="#{menuController.optionPlantilla('segumientoDoc')}" />
 			<p:menuitem value="Generar nuevo documento word" action="#{menuController.optionPlantilla('newdocument')}" /> 
 		</p:submenu>
-		<p:submenu label="Catálogo documentos generados" icon="pi pi-pencil">
+		<p:submenu label="Catálogo documentos generados" >
 			<p:menuitem value="Listado de documentos" action="#{menuController.optionPlantilla('listarDocumentos')}" />
 			<p:menuitem value="Validar documentos" action="#{menuController.optionPlantilla('validarDocumentos')}" /> 
 			<p:menuitem value="Descarga de documento" action="#{menuController.optionPlantilla('descarga')}" />

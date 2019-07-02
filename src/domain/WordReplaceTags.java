@@ -136,8 +136,9 @@ public class WordReplaceTags {
 	}
 
 	public void saveDocument() throws FileNotFoundException, IOException {
-		document.write(new FileOutputStream(outPath + "/" + documentName));
-
+		FileOutputStream fileOutput = new FileOutputStream (outPath + "/" + documentName);
+		document.write(fileOutput);
+		fileOutput.close();
 	}
 
 	public void closeDocument() throws IOException {

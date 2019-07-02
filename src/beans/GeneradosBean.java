@@ -1,9 +1,12 @@
 package beans;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -21,6 +24,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import funcionesWord.Constants;
 import domain.Documento;
+import domain.ToPDF;
 import lombok.Getter;
 import lombok.Setter;
 import servicio.Interfaces.DocumentoService;
@@ -66,9 +70,10 @@ public class GeneradosBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
-    public void onRowSelect(SelectEvent event) throws FileNotFoundException {
+    public void onRowSelect(SelectEvent event) throws InterruptedException, ExecutionException, IOException  {
     	String documento = ((Documento) event.getObject()).getNombre();
     	documento = documento.replace("docx", "pdf");
+    	generarPdf(documento);
     	realPath = Constants.OUT_PATH_PDF + documento;
         FacesMessage msg = new FacesMessage("Document Selected", ((Documento) event.getObject()).getNombre());
         FacesContext.getCurrentInstance().addMessage(null, msg);        
@@ -77,6 +82,19 @@ public class GeneradosBean implements Serializable {
     public void onRowUnselect(UnselectEvent event) {
         FacesMessage msg = new FacesMessage("Document Unselected", ((Documento) event.getObject()).getNombre());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    private void generarPdf(String name) throws InterruptedException, ExecutionException, IOException {
+    	ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+    	
+    	File fichero = new File(servletContext.getRealPath("/")+Constants.OUT_PATH_PDF + name);
+    	
+    	
+    	if (!fichero.exists()) {
+    		String nameOrigin = name.replace("pdf", "docx");
+			ToPDF.toPdf_d4j(Constants.OUT_PATH + "\\" + nameOrigin, servletContext.getRealPath("/")+Constants.OUT_PATH_PDF + name, servletContext.getRealPath("/")+Constants.OUT_PATH_PDF );
+			
+    	}
     }
     
 }

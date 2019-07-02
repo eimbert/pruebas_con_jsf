@@ -11,6 +11,8 @@ public class Constants {
     public static final String OUT_PATH = "c:\\uploads\\generados";
     public static final String OUT_PATH_PDF = "pdf\\";
     		
+    public static final String CODIGO_INICIO_PARRAFO = "${";
+    public static final String CODIGO_FIN_PARRAFO =  "}$";
     public static final String CODIGO_INICIO = "#{";
     public static final String CODIGO_FINAL = "}#";
     public static final String CODIGO_CONTROL = "#";
