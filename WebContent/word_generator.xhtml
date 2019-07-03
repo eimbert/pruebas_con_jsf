@@ -8,32 +8,34 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		crossorigin="anonymous" />
 	<title>Añadir plantillas al catálogo</title>
 	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
 </h:head>
 
 <h:body>
 	<div class="container">
-	<ui:include src="templates/menu.xhtml"> </ui:include>
-	<br />
-	<br/> 
-	
-	<h:form >
-		<p:panel id="panel" header="Generar documento Word" style="margin-bottom:10px;">
-			<p:outputLabel for="list" value="Selecciona la plantilla a partir de la cual quieres generar un nuevo documento:" />
-			<p:selectOneListbox id="list" value="#{menuController.document}" style="width: 100% ">
-				<f:selectItems value="#{menuController.getPlantillas()}"  var="plantillas" itemLabel="#{plantillas.nombre}" itemValue="#{plantillas.idPlantilla}" /> 
-				<p:ajax event="click"  listener="#{menuController.onDocumentChange}" />
-						
-			</p:selectOneListbox>
-		</p:panel>
-	
+		<ui:include src="templates/menu.xhtml">
+		</ui:include>
+		<br /> <br />
 		
-		<p:commandButton value="Generar documento" ajax="false" action="#{generarWordController.newWord(menuController.document)}" />
-	</h:form>
-	
-	
+		<h:form>
+			<p:panel id="panel" header="Generar documento Word"
+				style="margin-bottom:10px;">
+				<p:outputLabel for="list" value="Selecciona la plantilla a partir de la cual quieres generar un nuevo documento:" />
+				<p:selectOneListbox id="list" value="#{menuController.document}" style="width: 100% ">
+					<f:selectItems value="#{menuController.getPlantillas()}" var="plantillas" itemLabel="#{plantillas.nombre}" itemValue="#{plantillas.idPlantilla}" />
+					<p:ajax event="click" listener="#{menuController.onDocumentChange}" />
+				</p:selectOneListbox>
+			</p:panel>
+			<p:commandButton value="Generar documento" ajax="false"
+				action="#{generarWordController.newWord(menuController.document)}" />
+		</h:form>
+
+
 	</div>
 </h:body>
 

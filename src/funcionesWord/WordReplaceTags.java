@@ -1,4 +1,4 @@
-package domain;
+package funcionesWord;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -15,6 +16,8 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+
+import domain.TagPlantillaBO;
 import fr.opensagres.xdocreport.converter.Options;
 import fr.opensagres.xdocreport.converter.XDocConverterException;
 import fr.opensagres.poi.xwpf.converter.core.XWPFConverterException;
@@ -23,13 +26,13 @@ import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
 import fr.opensagres.xdocreport.converter.ConverterRegistry;
 
 import fr.opensagres.xdocreport.core.document.DocumentKind;
-import funcionesWord.Constants;
 
 public class WordReplaceTags {
 
 	private XWPFDocument document;
 	private String inPath, outPath;
 	private String documentName;
+	private EliminarCodigo eliminarCodigo = new EliminarCodigo();
 
 	public void replaceTags(List<TagPlantillaBO> tags) throws FileNotFoundException, IOException {
 		openDocument();
@@ -38,10 +41,15 @@ public class WordReplaceTags {
 			replaceTagsFormat(object);
 			replaceTextInTables(object);
 		});
+
+		eliminarCodigo.borrarCodigo(Constants.CODIGO_INICIO_PARRAFO);
+		eliminarCodigo.borrarCodigo(Constants.CODIGO_FIN_PARRAFO);
+		eliminarCodigo.escribirDocumento();
+				
 		saveDocument();
 		closeDocument();
 	}
-
+	
 	public void replaceTagsFormat(TagPlantillaBO tag) {
 		String subTag = "";
 
@@ -51,6 +59,7 @@ public class WordReplaceTags {
 				for (XWPFRun r : runs) {
 					String txt = r.getText(0);
 					subTag = concatenandoRuns(txt, tag, subTag, r);
+					eliminarCodigo.anadirParrafo( new DocumentWordFragment(r));
 				}
 			}
 		}
@@ -66,6 +75,7 @@ public class WordReplaceTags {
 						for (XWPFRun r : p.getRuns()) {
 							String txt = r.getText(0);
 							subTag = concatenandoRuns(txt, tag, subTag, r);
+							eliminarCodigo.anadirParrafo( new DocumentWordFragment(r));
 						}
 					}
 				}
@@ -77,10 +87,12 @@ public class WordReplaceTags {
 		if (txt != null && txt.contains(Constants.CODIGO_INICIO) || !subTag.equals("")) {
 			int inicio = txt.indexOf(Constants.CODIGO_INICIO);
 			int fin = txt.indexOf(Constants.CODIGO_FINAL, inicio);
+			
+			
 			if (fin > inicio && fin > 0 && inicio >= 0) {
 				if (tag.getCodigoEtiqueta().equals(txt)) {
 					r.setText("", 0); // Elimino el texto con el código de la etiqueta del documento.
-					typeFieldResponse(tag.getRespuesta(), r, tag.getTipoDeCampo());
+					typeFieldResponse(tag.getRespuesta(), r, tag.getTipoDeCampo(), tag.getRespuesta());
 					return "";
 				}
 			} else {
@@ -89,7 +101,7 @@ public class WordReplaceTags {
 						&& !txt.contains(Constants.CODIGO_INICIO)) {
 					r.setText("", 0); // Borro el último caracter
 					if (tag.getCodigoEtiqueta().trim().equals(subTag.trim())) {
-						typeFieldResponse(tag.getRespuesta(), r, tag.getTipoDeCampo());
+						typeFieldResponse(tag.getRespuesta(), r, tag.getTipoDeCampo(), tag.getRespuesta());
 					} else {
 						r.setText(subTag, 0); // Pongo la etiqueta original porque no es la que buscaba
 					}
@@ -102,17 +114,24 @@ public class WordReplaceTags {
 		return subTag;
 	}
 
-	private void typeFieldResponse(String str, XWPFRun r, String typeField) {
+	private void typeFieldResponse(String str, XWPFRun r, String typeField, String respuesta) {
 		r.setFontSize(11);
+
 		switch (typeField) {
 		case "text":
 			r.setText(str);
 			return;
 		case "only_check":
-			r.setText("[  ]");
+			if("true".equals(respuesta))
+				r.setText("[X]");
+			else
+				r.setText("[  ]");
 			return;
 		case "y_n":
-			r.setText("Si [  ]  No [  ]");
+			if("true".equals(respuesta))
+				r.setText("Si[X] No[  ]");
+			else
+				r.setText("Si[  ] No[X]");
 			return;
 		}
 		// r.addCarriageReturn();

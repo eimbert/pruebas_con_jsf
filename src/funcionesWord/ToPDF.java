@@ -1,4 +1,4 @@
-package domain;
+package funcionesWord;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,7 +18,7 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import com.documents4j.api.DocumentType;
 import com.documents4j.api.IConverter;
 import com.documents4j.job.LocalConverter;
-import funcionesWord.Constants;
+
 import fr.opensagres.poi.xwpf.converter.pdf.PdfConverter;
 import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
 

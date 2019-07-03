@@ -9,8 +9,8 @@ import javax.inject.Inject;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-import domain.WordGetTags;
 import funcionesWord.TagWord;
+import funcionesWord.WordGetTags;
 import servicio.Interfaces.TagsSearchFunctions;
 
 @Stateless

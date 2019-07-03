@@ -1,4 +1,4 @@
-package domain;
+package funcionesWord;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,9 +23,6 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
-import funcionesWord.Constants;
-import funcionesWord.TagWord;
-
 
 public class WordGetTags {
 
@@ -42,6 +39,7 @@ public class WordGetTags {
 		openDocument();
 		SearchTagsInText();
 		searchTagsInTables();
+		
 		int indice = 0;
 		for (String str : etiquetas) {
 			List<TagWord> tmpTags = new ArrayList<TagWord>();
@@ -53,10 +51,10 @@ public class WordGetTags {
 					str.indexOf(Constants.CODIGO_SEPARADOR, str.indexOf(Constants.CODIGO_SEPARADOR) + 1) + 1,
 					str.indexOf(Constants.CODIGO_FINAL));
 			if (tags.get(apartado) == null) {
-				tmpTags.add(new TagWord(codigoTag, tipoCampo, txtSolicitud, ayudasTag.get(indice)));
+				tmpTags.add(new TagWord(codigoTag, tipoCampo, txtSolicitud, limpiarTextoAyuda(ayudasTag.get(indice), codigoTag)));
 				tags.put(apartado, tmpTags);
 			} else {
-				tags.get(apartado).add(new TagWord(codigoTag, tipoCampo, txtSolicitud, ayudasTag.get(indice)));
+				tags.get(apartado).add(new TagWord(codigoTag, tipoCampo, txtSolicitud, limpiarTextoAyuda(ayudasTag.get(indice), codigoTag)));
 			}
 			indice++;
 		}
@@ -72,10 +70,10 @@ public class WordGetTags {
 				guardarTextoParrafo = true;
 				parrafo += txt;
 			}
-			if (txt != null && txt.contains(Constants.CODIGO_FIN_PARRAFO)) {
+			if (txt != null && txt.contains(Constants.CODIGO_FIN_PARRAFO) && guardarTextoParrafo) {
 				guardarTextoParrafo = false;
-				ayudasTag.add(parrafo);
-				parrafo = ""; 
+//				ayudasTag.add(parrafo);
+//				parrafo = ""; 
 			}
 			if (txt != null && txt.contains(Constants.CODIGO_INICIO)) {
 				int inicio = txt.indexOf(Constants.CODIGO_INICIO);
@@ -85,6 +83,7 @@ public class WordGetTags {
 					ayudasTag.add("Sin ayuda");
 				else
 					ayudasTag.add(parrafo);
+				parrafo = ""; 
 			}
 		}
 	}
@@ -125,8 +124,12 @@ public class WordGetTags {
 		}
 	}
 
-	public WordGetTags() {
-		
+	
+	private String limpiarTextoAyuda(String texto, String codigoTag) {
+		texto = texto.replace(Constants.CODIGO_INICIO_PARRAFO, "");
+		texto = texto.replace(Constants.CODIGO_FIN_PARRAFO, "");
+		texto = texto.replace(codigoTag, " [ETIQUETA] ");
+		return texto;
 	}
 
 	public void openDocument() throws FileNotFoundException, IOException, InvalidFormatException {

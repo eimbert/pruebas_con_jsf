@@ -52,11 +52,11 @@
         		<p:ajax event="rowEditCancel" listener="#{tagsBean.onRowCancel}" update=":form:msgs" />
         		<p:ajax event="cellEdit" listener="#{tagsBean.onCellEdit}" update=":form:msgs" />
         		        		       		
-				<p:column headerText="Valor del campo" sortBy="#{tag.textopregunta}" style="width:45%">
+				<p:column headerText="Campo a cumplimentar" sortBy="#{tag.textopregunta}" style="width:45%">
 					<h:outputText value="#{tag.textopregunta}" />
 				</p:column>
 				
-				<p:column headerText="Tipo campo" style="width:45%">
+				<p:column headerText="Valor para el campo" style="width:45%">
 					<p:cellEditor>
 						<f:facet name="output"><h:outputText value="#{tag.respuesta}" /></f:facet>
 						<f:facet name="input"><p:inputText value="#{tag.respuesta}" style="width:100%" label="Registro" rendered="#{tag.tipoDeCampo == 'text'}" /></f:facet>
@@ -69,7 +69,7 @@
             		<p:rowEditor />
         		</p:column>
         		<p:column style="width:5%">
-        			<p:commandButton icon="pi pi-question-circle" oncomplete="PF('sidebar').show()"  style="font-size: 1.3em" action="#{tagsBean.setAyuda(tag.textoAyuda)}" update=":idSidebar" />
+        			<p:commandButton icon="pi pi-question-circle" oncomplete="PF('sidebar').show()"  style="font-size: 1.3em" action="#{tagsBean.setAyuda(tag.textoAyuda)}" update="@form" />
         		</p:column>
 			</p:dataTable>
 		</h:form>

@@ -11,10 +11,10 @@ import javax.servlet.ServletContext;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import domain.TagPlantillaBO;
-import domain.ToPDF;
-import domain.WordReplaceTags;
 import fr.opensagres.xdocreport.converter.XDocConverterException;
 import funcionesWord.Constants;
+import funcionesWord.ToPDF;
+import funcionesWord.WordReplaceTags;
 import servicio.Interfaces.WordReplaceService;
 
 @Stateless
