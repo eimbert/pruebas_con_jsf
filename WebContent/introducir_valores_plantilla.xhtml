@@ -24,11 +24,12 @@
 		<p:panel id="panel" header="Cumplimentar datos plantilla" style="margin-bottom:10px;">
 		
 		<h:form id="form">
-		
-			<p:sidebar widgetVar="sidebar" position="bottom" baseZIndex="10000">
-	    		<p:outputLabel  value="#{tagsBean.getTextoAyuda()}" />
-	    		
-			</p:sidebar>
+			<h:panelGroup id="idSidebar">
+				<p:sidebar widgetVar="sidebar" position="bottom" baseZIndex="10000">
+		    		<p:outputLabel  value="#{tagsBean.getSelectedTag()}" />
+				</p:sidebar>
+			
+			</h:panelGroup>
 			
 			<p:growl id="msgs" showDetail="true"/>
 			
@@ -42,18 +43,15 @@
             </h:panelGrid>
             <p:separator/>
             
-			<p:dataTable id="tags" var="tag" value="#{tagsBean.getEtiquetas()}" editable="true" style="font-size: 13px">
+			<p:dataTable id="tags" var="tag" value="#{tagsBean.etiquetas}" editable="true" style="font-size: 13px" >
 				<f:facet name="header">
             		Campos plantilla
         		</f:facet>
         		
-
-        		
-        		
         		<p:ajax event="rowEdit" listener="#{tagsBean.onRowEdit}" update=":form:msgs" />
         		<p:ajax event="rowEditCancel" listener="#{tagsBean.onRowCancel}" update=":form:msgs" />
         		<p:ajax event="cellEdit" listener="#{tagsBean.onCellEdit}" update=":form:msgs" />
-        		       		
+        		        		       		
 				<p:column headerText="Valor del campo" sortBy="#{tag.textopregunta}" style="width:45%">
 					<h:outputText value="#{tag.textopregunta}" />
 				</p:column>
@@ -71,7 +69,7 @@
             		<p:rowEditor />
         		</p:column>
         		<p:column style="width:5%">
-        			<p:commandButton icon="pi pi-question-circle" oncomplete="PF('sidebar').show()"  style="font-size: 1.3em" />
+        			<p:commandButton icon="pi pi-question-circle" oncomplete="PF('sidebar').show()"  style="font-size: 1.3em" action="#{tagsBean.setAyuda(tag.textoAyuda)}" update=":idSidebar" />
         		</p:column>
 			</p:dataTable>
 		</h:form>

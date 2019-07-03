@@ -29,18 +29,20 @@ import funcionesWord.TagWord;
 
 public class WordGetTags {
 
-	Map<String, List<TagWord>> tags = new HashMap<String, List<TagWord>>();;
+	Map<String, List<TagWord>> tags = new HashMap<String, List<TagWord>>();
+	List<String> etiquetas = new ArrayList<String>();
+	List<String> ayudasTag = new ArrayList<String>();
 	private XWPFDocument document;
 	private String documentName;
 	private String inPath;
 
 	public void searchTags() throws FileNotFoundException, IOException, InvalidFormatException {
-		List<String> etiquetas = new ArrayList<String>();
+		
 
 		openDocument();
-		SearchTagsInText(etiquetas);
-		searchTagsInTables(etiquetas);
-
+		SearchTagsInText();
+		searchTagsInTables();
+		int indice = 0;
 		for (String str : etiquetas) {
 			List<TagWord> tmpTags = new ArrayList<TagWord>();
 			String codigoTag = str;
@@ -51,16 +53,17 @@ public class WordGetTags {
 					str.indexOf(Constants.CODIGO_SEPARADOR, str.indexOf(Constants.CODIGO_SEPARADOR) + 1) + 1,
 					str.indexOf(Constants.CODIGO_FINAL));
 			if (tags.get(apartado) == null) {
-				tmpTags.add(new TagWord(codigoTag, tipoCampo, txtSolicitud));
+				tmpTags.add(new TagWord(codigoTag, tipoCampo, txtSolicitud, ayudasTag.get(indice)));
 				tags.put(apartado, tmpTags);
 			} else {
-				tags.get(apartado).add(new TagWord(codigoTag, tipoCampo, txtSolicitud));
+				tags.get(apartado).add(new TagWord(codigoTag, tipoCampo, txtSolicitud, ayudasTag.get(indice)));
 			}
+			indice++;
 		}
 		closeDocument();
 	}
 
-	public List<String> SearchTagsInText(List<String> tags) {
+	public void SearchTagsInText() {
 		String parrafo = "";
 		Boolean guardarTextoParrafo = false;
 		for (XWPFParagraph p : document.getParagraphs()) {
@@ -71,18 +74,22 @@ public class WordGetTags {
 			}
 			if (txt != null && txt.contains(Constants.CODIGO_FIN_PARRAFO)) {
 				guardarTextoParrafo = false;
-				parrafo = ""; //aqui hay que guardalo
+				ayudasTag.add(parrafo);
+				parrafo = ""; 
 			}
 			if (txt != null && txt.contains(Constants.CODIGO_INICIO)) {
 				int inicio = txt.indexOf(Constants.CODIGO_INICIO);
 				int fin = txt.indexOf(Constants.CODIGO_FINAL, inicio);
-				tags.add(txt.substring(inicio, fin + 2).trim());
+				etiquetas.add(txt.substring(inicio, fin + 2).trim());
+				if(parrafo.trim().length()==0 ) 
+					ayudasTag.add("Sin ayuda");
+				else
+					ayudasTag.add(parrafo);
 			}
 		}
-		return tags;
 	}
 
-	public List<String> searchTagsInTables(List<String> tags) {
+	public void searchTagsInTables() {
 		Boolean creandoTag = false;
 		String subTag = "";
 		for (XWPFTable tbl : document.getTables()) {
@@ -96,7 +103,8 @@ public class WordGetTags {
 								int inicio = txt.indexOf(Constants.CODIGO_INICIO);
 								int fin = txt.indexOf(Constants.CODIGO_FINAL, inicio);
 								if (fin > inicio && fin > 0 && inicio >= 0) {
-									tags.add(txt.substring(inicio, fin + 2).trim());
+									etiquetas.add(txt.substring(inicio, fin + 2).trim());
+									ayudasTag.add("sin ayuda");
 									creandoTag = false;
 									subTag = "";
 								} else {
@@ -104,7 +112,8 @@ public class WordGetTags {
 									if ((txt.contains(Constants.CODIGO_FINAL) || txt.contains(Constants.CODIGO_CONTROL))
 											&& !txt.contains(Constants.CODIGO_INICIO)) {
 										creandoTag = false;
-										tags.add(subTag.trim());
+										ayudasTag.add("sin ayuda");
+										etiquetas.add(subTag.trim());
 										subTag = "";
 									}
 								}
@@ -114,7 +123,6 @@ public class WordGetTags {
 				}
 			}
 		}
-		return tags;
 	}
 
 	public WordGetTags() {

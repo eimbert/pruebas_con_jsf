@@ -111,6 +111,7 @@ public class PlantillaController {
 			tagPlantilla.setTipoDeCampo(tag.getTipoCampo());
 			tagPlantilla.setTextopregunta(tag.getTextoSolicitud());
 			tagPlantilla.setCodigoEtiqueta(tag.getCodigoTag());
+			tagPlantilla.setTextoAyuda(tag.getTextoAyuda());
 			tagPlantilla.setPlantilla(datosPlantilla);
 			datosPlantilla.addTagplantilla(tagPlantilla);
 		}));

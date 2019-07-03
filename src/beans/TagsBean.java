@@ -1,7 +1,9 @@
 package beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -14,12 +16,16 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 import com.tangosol.coherence.component.util.Collections;
 
 import beans.Controllers.CumplimentarController;
 import beans.Controllers.MenuController;
+import domain.Documento;
 import domain.TagPlantillaBO;
+import funcionesWord.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,6 +40,7 @@ public class TagsBean implements Serializable {
 	private List<TagPlantillaBO> etiquetas;
 	private String seccion;
 	private int idPlantilla;
+	private String selectedTag;
 
 	@ManagedProperty("#{tagService}")
 	private CumplimentarController service;
@@ -49,10 +56,6 @@ public class TagsBean implements Serializable {
 
 	public List<String> getSecciones() {
 		return service.getSecciones();
-	}
-
-	public List<TagPlantillaBO> getEtiquetas() {
-		return etiquetas;
 	}
 
 	public void onSeccionChange() {
@@ -99,8 +102,11 @@ public class TagsBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
+	public String getSelectedTag() {
+		return this.selectedTag;
+	}
 	
-	public String getTextoAyuda() {
-		return "El incumplimiento de las prescripciones establecidas en el presente Pliego y en el Pliego de Prescripciones Técnicas, tanto en lo relativo a los requerimientos generales como en los requisitos técnicos, supondrá la exclusión de la oferta del proceso de valoración.";
+	public void setAyuda(String textoAyuda) {
+		selectedTag = textoAyuda;
 	}
 }
