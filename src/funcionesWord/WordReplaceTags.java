@@ -59,7 +59,7 @@ public class WordReplaceTags {
 				for (XWPFRun r : runs) {
 					String txt = r.getText(0);
 					subTag = concatenandoRuns(txt, tag, subTag, r);
-					eliminarCodigo.anadirParrafo( new DocumentWordFragment(r));
+					eliminarCodigo.anadirParrafo( new FragmentoDelDocumento(r));
 				}
 			}
 		}
@@ -75,7 +75,7 @@ public class WordReplaceTags {
 						for (XWPFRun r : p.getRuns()) {
 							String txt = r.getText(0);
 							subTag = concatenandoRuns(txt, tag, subTag, r);
-							eliminarCodigo.anadirParrafo( new DocumentWordFragment(r));
+							eliminarCodigo.anadirParrafo( new FragmentoDelDocumento(r));
 						}
 					}
 				}
@@ -134,7 +134,6 @@ public class WordReplaceTags {
 				r.setText("Si[  ] No[X]");
 			return;
 		}
-		// r.addCarriageReturn();
 	}
 	
 

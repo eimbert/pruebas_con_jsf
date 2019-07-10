@@ -75,7 +75,7 @@ public class GeneradosBean implements Serializable {
     	documento = documento.replace("docx", "pdf");
     	generarPdf(documento);
     	realPath = Constants.OUT_PATH_PDF + documento;
-        FacesMessage msg = new FacesMessage("Document Selected", ((Documento) event.getObject()).getNombre());
+        FacesMessage msg = new FacesMessage("Documento disponible.", "");//, ((Documento) event.getObject()).getNombre());
         FacesContext.getCurrentInstance().addMessage(null, msg);        
     }
  

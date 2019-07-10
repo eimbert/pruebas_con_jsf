@@ -24,6 +24,8 @@ import lombok.Setter;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Plantilla.findAll", query = "SELECT p FROM PlantillaBO p")
+   ,@NamedQuery(name = "Plantilla.findUnEdited", query = "SELECT p FROM PlantillaBO p WHERE p.editada = 0 ORDER BY p.idPlantilla DESC") 
+   ,@NamedQuery(name = "Plantilla.findEdited", query = "SELECT p FROM PlantillaBO p WHERE p.editada = 1 ORDER BY p.idPlantilla DESC")
    ,@NamedQuery(name = "Plantilla.findByNombre", query = "SELECT p FROM PlantillaBO p WHERE p.nombre = :nombre")})
 @Table(name = "plantillas")
 public class PlantillaBO {
@@ -52,37 +54,23 @@ public class PlantillaBO {
 	@Temporal(TemporalType.DATE)
 	private Date fechaCreacion;
 	
-	@Column(name = "fecha_validez", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date fechaValidez;
+	@Column(name = "id_tipologia", nullable = false)
+	private int idTipologia;
 	
-	@Column(name = "validada")
+	@Column(name = "id_grupo_usuarios", nullable = false)
+	private int idGrupoUsuarios;
+	
+	@Column(name = "valida")
 	private String validada;
+	
+	@Column(name = "editada")
+	private int editada;
 	
 	@OneToMany(mappedBy="plantilla", cascade = CascadeType.ALL)
 	private List<TagPlantillaBO> tagPlantilla  = new ArrayList<TagPlantillaBO>();
 
 
-	public PlantillaBO() {
-		super();
-		
-	}
-
-	public PlantillaBO(String nombre, String modelo, String version, String usuario, Date fechaCreacion, Date fechaValidez) {
-		super();
-		this.nombre = nombre;
-		this.modelo = modelo;
-		this.version = version;
-		this.usuario = usuario;
-		this.fechaCreacion = fechaCreacion;
-		this.fechaValidez = fechaValidez;
-	}
 	
-	public PlantillaBO(String nombre) {
-		super();
-		this.nombre = nombre;
-	}
-
 	public void addTagplantilla(TagPlantillaBO tag) {
 		this.tagPlantilla.add(tag);
 	}

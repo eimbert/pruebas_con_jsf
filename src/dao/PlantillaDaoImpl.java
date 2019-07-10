@@ -19,6 +19,16 @@ public class PlantillaDaoImpl implements PlantillaDao {
 	public List<PlantillaBO> findAllPlantillas() {
 		 return em.createNamedQuery("Plantilla.findAll").getResultList();
 	}
+	
+	@Override
+	public List<PlantillaBO> findUnEditedPlantillas() {
+		return em.createNamedQuery("Plantilla.findUnEdited").getResultList();
+	}
+
+	@Override
+	public List<PlantillaBO> findEditedPlantillas() {
+		return em.createNamedQuery("Plantilla.findEdited").getResultList();
+	}
 
 	@Override
 	public PlantillaBO findPlantillaById(int plantilla) {
@@ -27,7 +37,7 @@ public class PlantillaDaoImpl implements PlantillaDao {
 
 	@Override
 	public PlantillaBO findPlantillaByName(PlantillaBO plantilla) {
-        Query query = em.createQuery("from Plantilla p where p.nombre =: name");
+        Query query = em.createQuery("from PlantillaBO p where p.nombre =: name");
         query.setParameter("name", plantilla.getNombre());
         return (PlantillaBO) query.getSingleResult();
 	}

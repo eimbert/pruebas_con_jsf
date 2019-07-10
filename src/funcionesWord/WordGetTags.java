@@ -72,8 +72,7 @@ public class WordGetTags {
 			}
 			if (txt != null && txt.contains(Constants.CODIGO_FIN_PARRAFO) && guardarTextoParrafo) {
 				guardarTextoParrafo = false;
-//				ayudasTag.add(parrafo);
-//				parrafo = ""; 
+
 			}
 			if (txt != null && txt.contains(Constants.CODIGO_INICIO)) {
 				int inicio = txt.indexOf(Constants.CODIGO_INICIO);

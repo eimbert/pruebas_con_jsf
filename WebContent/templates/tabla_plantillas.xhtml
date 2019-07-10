@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true"/>
+		<p:panel id="panel" header="Últimas plantillas incorporadas" style="margin-bottom:10px;" >
+		
+			<p:dataTable  id="plt" var="plantilla" value="#{listBaseBean.plantillas}" editable="true" rows="5" 
+						paginator="true"
+                		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                		rowsPerPageTemplate="5,10,15" style="font-size: 13px">
+
+				<p:ajax event="rowEdit" listener="#{listBaseBean.onRowEdit}" update=":form:msgs" />
+       			<p:ajax event="rowEditCancel" listener="#{listBaseBean.onRowCancel}" update=":form:msgs" />
+				<p:ajax event="sort" skipChildren="false" />
+				
+				<p:column headerText="Nombre" sortBy="#{plantilla.nombre}" style="text-align: left; width:24%;" >
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{plantilla.nombre}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{plantilla.nombre}" style="width:100%" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="Modelo" sortBy="#{plantilla.modelo}" style="text-align: left; width:18%;" >
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{plantilla.modelo}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{plantilla.modelo}" style="width:98%" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="Version" style="text-align: center; width:7%;">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{plantilla.version}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{plantilla.version}" style="width:98%" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="Fecha creación" sortBy="#{plantilla.fechaCreacion}" style="text-align: center; width:14%;">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{plantilla.fechaCreacion}" ><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText></f:facet>
+						<f:facet name="input"><p:calendar value="#{plantilla.fechaCreacion}" pattern="dd-MM-yyyy" mask="true" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+					
+				<p:column headerText="Usuario" sortBy="#{plantilla.idUsuario}" style="text-align: left; width:10%;">
+						<h:outputText value="#{plantilla.idUsuario}"  />
+				</p:column>
+				
+				<p:column headerText="Valida" sortBy="#{plantilla.validada}" style="text-align: center; width:10%;">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{listBaseBean.booleanToString(plantilla.validada)}" /></f:facet>
+						<f:facet name="input"><p:selectBooleanButton  value="#{plantilla.validada}" onLabel="Sí" offLabel="No" style="width:60px" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column style="width:3%">
+            		<p:rowEditor id="editReg"/>
+            		<p:tooltip id="toolTipedit" for="editReg" value="Editar los valores de los atributos" position="top"/>
+        		</p:column>
+        		<p:column style="width:5%">
+        			<p:commandButton id="newDocument" icon="pi pi-tags" style="font-size: 1em" rendered="#{plantilla.validada =='true'}" onclick="PF('dlgTipologia').show();"> 
+						<f:actionListener binding="#{listBaseBean.setIdBasePlantilla(plantilla.idPlantilla)}" />
+        			</p:commandButton>
+        			<p:tooltip id="toolTipNew" for="newDocument" value="Generar nuevo documento" position="top"/>
+        		</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<h:form id="dialog">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:dialog header="Nuevo documento" widgetVar="dlgTipologia" modal="true" width="400px" >
+				<p:outputLabel for="tipologia" value="Selecciona la tipología del nuevo documento: " />
+		        <p:selectOneMenu id="tipologia" value="#{listBaseBean.tipologiaSelected}" style="width:100%">
+		        	<f:selectItems value="#{listBaseBean.tipologias}" />
+		        </p:selectOneMenu>
+		        <p></p>
+		    	<h:outputText for="nameDocument" value="Nombre del nuevo documento:" />
+		    	<p:inputText id="nameDocument" value="#{listBaseBean.nombreDocumento}" required="true" style="width: 100% "/>
+		    	<p></p>
+		    	<p:commandButton value="Crear documento" ajax="false" action="#{listBaseBean.nuevoDocumento()}" onclick="PF('dlgTipologia').hide();" />
+		    	<p:spacer height="10"></p:spacer>
+		    	<p:commandButton value="Cancelar" ajax="false" onclick="PF('dlgTipologia').hide();" type="button" />
+		    	<p></p>
+			</p:dialog> 
+		</h:panelGrid> 
+	</h:form>
+</html>

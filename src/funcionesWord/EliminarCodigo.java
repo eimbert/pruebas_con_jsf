@@ -3,17 +3,19 @@ package funcionesWord;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EliminarCodigo {
+import funcionesWord.v2.LecturaDelDocumento;
 
-	List<DocumentWordFragment> docFragment = new ArrayList<DocumentWordFragment>();
+public class EliminarCodigo{
+
+	List<FragmentoDelDocumento> docFragment = new ArrayList<FragmentoDelDocumento>();
 	
-	public void anadirParrafo(DocumentWordFragment parrafo) {
+	public void anadirParrafo(FragmentoDelDocumento parrafo) {
 		if(parrafo.getTextoParrafo()!=null)
 			docFragment.add(parrafo);
 	}
 	
 	public void borrarCodigo(String codigo) {
-		docFragment.stream().forEach(parrafo -> parrafo.setTexto(parrafo.getTextoParrafo().replace(codigo, "")));
+		docFragment.stream().forEach(parrafo -> parrafo.setTextoParrafo(parrafo.getTextoParrafo().replace(codigo, "")));
 		borrarCodigosSueltos(codigo);
 	}
 	
@@ -27,8 +29,8 @@ public class EliminarCodigo {
 		
 		for(int x = 0; x < docFragment.size()-1; x++) {
 			if(docFragment.get(x).getUltimoCarcater().equals(codigoInicio) && docFragment.get(x+1).getPrimerCatacter().equals(codigoFinal) && docFragment.get(x).getTextoParrafo().length() > 0) {
-				docFragment.get(x).setTexto(docFragment.get(x).getTextoParrafo().substring(1));
-				docFragment.get(x+1).setTexto(docFragment.get(x+1).getTextoParrafo().substring(0, docFragment.get(x+1).getTextoParrafo().length()-1));
+				docFragment.get(x).setTextoParrafo(docFragment.get(x).getTextoParrafo().substring(1));
+				docFragment.get(x+1).setTextoParrafo(docFragment.get(x+1).getTextoParrafo().substring(0, docFragment.get(x+1).getTextoParrafo().length()-1));
 			}
 		}
 	}

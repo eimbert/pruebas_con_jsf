@@ -10,6 +10,10 @@ import domain.PlantillaBO;
 public interface PlantillaService {
 	
     public List<PlantillaBO> listarPlantillas();
+    
+    public List<PlantillaBO> listarPlantillasNoEditadass();
+    
+    public List<PlantillaBO> listarPlantillasEditadas();
 
     public PlantillaBO encontrarPlantillaId(int plantilla);
 

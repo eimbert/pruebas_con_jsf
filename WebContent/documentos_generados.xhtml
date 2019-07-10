@@ -33,7 +33,7 @@
 	        			<p:ajax event="rowEditCancel" listener="#{generadosBean.onRowCancel}" update=":form:msgs" />
 						<p:ajax event="sort" skipChildren="false" />
 						<p:ajax event="rowSelect" listener="#{generadosBean.onRowSelect}" update=":form:msgs" />
-	       				<p:ajax event="rowUnselect" listener="#{generadosBean.onRowUnselect}" update=":form:msgs" />
+<!-- 	       				<p:ajax event="rowUnselect" listener="#{generadosBean.onRowUnselect}" update=":form:msgs" /> -->
 	       				
 						
 						<p:column headerText="Nombre" sortBy="#{documentos.nombre}" style="text-align: left; width:55%;" >
@@ -70,18 +70,12 @@
 			</p:tabView>
 		</h:form>
 		
-		<p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
-		
-			<f:facet name="start">
-				<p:graphicImage name="img/please_wait.gif" />
-			</f:facet>
-
-		</p:ajaxStatus>
 
 		<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
 
 		<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-			<p:graphicImage name="img/please_wait.gif" />
+			<h:outputText value="Generando vista de fichero, un momento por favor..." ></h:outputText>
+<!-- 			<p:graphicImage name="img/please_wait.gif" /> -->
 		</p:dialog>
 		
 	</div>

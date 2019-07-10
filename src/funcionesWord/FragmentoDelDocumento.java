@@ -2,13 +2,17 @@ package funcionesWord;
 
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
+import lombok.Getter;
+import lombok.Setter;
 
-public class DocumentWordFragment {
+@Getter
+@Setter
+public class FragmentoDelDocumento {
 
 	private XWPFRun parrafo;
 	private String textoParrafo;
 	
-	DocumentWordFragment(XWPFRun parrafo){
+	public FragmentoDelDocumento(XWPFRun parrafo){
 		this.parrafo = parrafo;
 		this.textoParrafo = parrafo.getText(0);
 	}
@@ -31,12 +35,20 @@ public class DocumentWordFragment {
 		return this.textoParrafo;
 	}
 	
-	public void setTexto(String texto) {
+	public void setTextoParrafo(String texto) {
 		this.textoParrafo = texto;
+	}
+	
+	public void addText(String texto) {
+		this.textoParrafo += texto;
 	}
 	
 	public void escribirParrafo() {
 		parrafo.setText(textoParrafo, 0);
+	}
+	
+	public void escribirParrafo(String texto) {
+		parrafo.setText(texto, 0);
 	}
 	
 	public void borrarParrafo() {

@@ -9,6 +9,7 @@
 		<navigation-case>
 			<from-outcome>new</from-outcome>
 			<to-view-id>/new_plantilla.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>list</from-outcome>
@@ -20,7 +21,7 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>rellenar</from-outcome>
-			<to-view-id>/introducir_valores_plantilla.xhtml</to-view-id>
+			<to-view-id>/editar_campos_plantilla.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>newdocument</from-outcome>

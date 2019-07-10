@@ -5,7 +5,8 @@ public class Constants {
     public static final String DOCX = ".docx";
     public static final String PDF = ".pdf";
 
-    public static final String TEST_DOCUMENT_NAME = "docx/ReplaceTextTest.docx";
+    public static final String TEST_DOCUMENT_NAME = "MODELO_PLIEGO_PCAP.docx";
+    //public static final String TEST_DOCUMENT_NAME = "Contrato.docx";
     
     public static final String IN_PATH = "c:\\uploads";
     public static final String OUT_PATH = "c:\\uploads\\generados";

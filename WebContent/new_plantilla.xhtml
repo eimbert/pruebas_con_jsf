@@ -30,10 +30,7 @@
 		
 					<p:outputLabel value="Versión:" for="versionInput" />
 					<p:inputText id="versionInput" value="#{plantillaBean.version}" required="true" style="width: 25% " />
-								
-					<p:outputLabel value="Fecha validez:  " for="fechaValidezInput" />
-					<p:calendar id="fechaValidezInput" value="#{plantillaBean.fechaValidez}" pattern="dd-MM-yyyy" mask="true"  locale="fr" required="true" />
-			
+									
 					<p:outputLabel value="Selecciona la plantilla para cargar:" for="plantillaUpload"/>
 					<h:inputFile id="plantillaUpload" value="#{plantillaBean.uploadedFile}" >
 						<f:validator validatorId="fileUploadValidator"/>

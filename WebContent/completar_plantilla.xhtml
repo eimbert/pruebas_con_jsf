@@ -34,7 +34,7 @@
 						<p:ajax event="click"  update="version" />
 						<p:ajax event="click"  update="usuario" />
 						<p:ajax event="click"  update="fechaCreacion" />
-						<p:ajax event="click"  update="fechaValidez" />
+						
 						
 					</p:selectOneListbox>
 				</p:panel>
@@ -56,8 +56,6 @@
 					<p:outputLabel value="Fecha creación: "  />
         			<p:outputLabel id="fechaCreacion"  value="#{menuController.fechaCreacion}" />	
 				
-					<p:outputLabel value="Fecha validez:  "  />
-					<p:outputLabel id="fechaValidez" value="#{menuController.fechaValidez}" />
 				</h:panelGrid>
 				</p:panel>
 				<p:commandButton value="Completar plantilla" ajax="false" action="#{menuController.optionPlantilla('rellenar')}" />

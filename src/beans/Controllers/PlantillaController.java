@@ -25,9 +25,11 @@ import javax.servlet.http.Part;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import beans.PlantillaBean;
 import domain.PlantillaBO;
+import domain.PlantillaBaseBO;
 import domain.TagPlantillaBO;
 import funcionesWord.TagWord;
 import servicio.TagsSearchFunctionsImpl;
+import servicio.Interfaces.PlantillaBaseService;
 import servicio.Interfaces.PlantillaService;
 import servicio.Interfaces.TagsSearchFunctions;
 
@@ -41,10 +43,7 @@ public class PlantillaController {
 	private PlantillaBean plantilla;
 
 	@Inject
-	private PlantillaService plantillaService;
-
-	@Inject
-	private TagsSearchFunctions buscarTags; 
+	private PlantillaBaseService plantillaBaseService;
 
 	private String nombreDelFichero;
 
@@ -69,9 +68,6 @@ public class PlantillaController {
 
 		Files.copy(in, copied.toPath(), REPLACE_EXISTING);
 		
-
-		buscarTags.searchTags(Constants.IN_PATH, nombreDelFichero);
-		
 		saveData();
 		
 		return "index";
@@ -93,30 +89,18 @@ public class PlantillaController {
 	}
 
 	private void saveData() {
-		PlantillaBO datosPlantilla = new PlantillaBO();
+		PlantillaBaseBO datosPlantilla = new PlantillaBaseBO();
 		datosPlantilla.setNombre(plantilla.getNombre());
 		datosPlantilla.setNombreDelDocumento(nombreDelFichero);
 		datosPlantilla.setModelo(plantilla.getModelo());
-		datosPlantilla.setUsuario(plantilla.getUsuario());
+		datosPlantilla.setIdUsuario(plantilla.getIdUsuario());
 		datosPlantilla.setVersion(plantilla.getVersion());
-		datosPlantilla.setValidada("false");
-		datosPlantilla.setFechaValidez(plantilla.getFechaValidez());
+		datosPlantilla.setValidada("true");
 		
 		
 		datosPlantilla.setFechaCreacion(new Date());
-		
-		buscarTags.getTags().keySet().forEach((key) -> buscarTags.getTags().get(key).forEach((tag) -> {
-			TagPlantillaBO  tagPlantilla = new TagPlantillaBO();
-			tagPlantilla.setSeccion(key);
-			tagPlantilla.setTipoDeCampo(tag.getTipoCampo());
-			tagPlantilla.setTextopregunta(tag.getTextoSolicitud());
-			tagPlantilla.setCodigoEtiqueta(tag.getCodigoTag());
-			tagPlantilla.setTextoAyuda(tag.getTextoAyuda());
-			tagPlantilla.setPlantilla(datosPlantilla);
-			datosPlantilla.addTagplantilla(tagPlantilla);
-		}));
 						
-		plantillaService.registrarPlantilla(datosPlantilla);
+		plantillaBaseService.registrarPlantilla(datosPlantilla);
 
 	}
 

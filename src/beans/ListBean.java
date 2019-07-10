@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -15,6 +16,7 @@ import javax.servlet.http.Part;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
+import beans.Controllers.MenuController;
 import domain.PlantillaBO;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,11 +33,14 @@ public class ListBean implements Serializable  {
 	@Inject
 	private PlantillaService plantillaService;
 	
+	@ManagedProperty("#{menuController}")
+	private MenuController menuService;
+	
 	private List<PlantillaBO> plantillas;
 
 	@PostConstruct
     public void init() {
-		plantillas = plantillaService.listarPlantillas();
+		plantillas = plantillaService.listarPlantillasNoEditadass();
 	}
 
 	public String booleanToString(Boolean valor){
@@ -54,6 +59,14 @@ public class ListBean implements Serializable  {
 	public void onRowCancel(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Edición cancelada", "");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public void modificarPlantilla() {
+		PlantillaBO registro= plantillaService.encontrarPlantillaId(Integer.parseInt(menuService.getDocument()));
+		registro.setEditada(1);
+		//faltan el resto de campos editados
+		plantillaService.modificarPlantilla(registro);
+		
 	}
 	
 	public void onCellEdit(CellEditEvent event) {

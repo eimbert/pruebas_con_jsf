@@ -7,6 +7,10 @@ import domain.PlantillaBO;
 public interface PlantillaDao {
 	public List<PlantillaBO> findAllPlantillas();
 
+	public List<PlantillaBO> findUnEditedPlantillas();
+	
+	public List<PlantillaBO> findEditedPlantillas();
+	
 	public PlantillaBO findPlantillaById(int plantilla);
 
 	public PlantillaBO findPlantillaByName(PlantillaBO plantilla);

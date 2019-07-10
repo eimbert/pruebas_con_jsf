@@ -28,9 +28,9 @@ public class PlantillaBean implements Serializable {
 	private String nombre;
 	private String modelo;
 	private String version;
-	private String usuario;
+	private int idUsuario;
 	private Date fechaCreacion;
-	private Date fechaValidez;
+
 	
 	private Part uploadedFile;
 

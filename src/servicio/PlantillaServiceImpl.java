@@ -18,7 +18,17 @@ public class PlantillaServiceImpl implements PlantillaService {
 	
 	@Override
 	public List<PlantillaBO> listarPlantillas() {
-		return plantillaDao.findAllPlantillas();
+		return plantillaDao.findAllPlantillas();		
+	}
+	
+	@Override
+	public List<PlantillaBO> listarPlantillasNoEditadass() {
+		return plantillaDao.findUnEditedPlantillas();
+	}
+
+	@Override
+	public List<PlantillaBO> listarPlantillasEditadas() {
+		return plantillaDao.findEditedPlantillas();
 	}
 
 	@Override

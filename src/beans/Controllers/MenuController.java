@@ -21,12 +21,12 @@ import servicio.Interfaces.PlantillaService;
 @SessionScoped
 public class MenuController {
 
-	private String nombre;
-	private String modelo;
-	private String version;
-	private String usuario;
-	private String fechaCreacion;
-	private String fechaValidez;	
+//	private String nombre;
+//	private String modelo;
+//	private String version;
+//	private String usuario;
+//	private String fechaCreacion;
+
 	
 	private String document;
 	
@@ -38,23 +38,21 @@ public class MenuController {
 
 	}
 	
-	public List<PlantillaBO> getPlantillas(){
-		return plantillaService.listarPlantillas();
-	}
+//	public List<PlantillaBO> getPlantillas(){
+//		return plantillaService.listarPlantillasNoEditadass();
+//	}
 	
-	public void onDocumentChange() {
-		PlantillaBO registro= plantillaService.encontrarPlantillaId(Integer.parseInt(document));
-		setNombre(registro.getNombre());
-		setModelo(registro.getModelo());
-		setVersion(registro.getVersion()+"");
-		setFechaCreacion(registro.getFechaCreacion().toString());
-		setFechaValidez(registro.getFechaValidez().toString());
-		
-	}
 	
-	public void modificarPlantilla() {
-		
-		
-	}
+	
+//	public void onDocumentChange() {
+//		PlantillaBO registro= plantillaService.encontrarPlantillaId(Integer.parseInt(document));
+//		setNombre(registro.getNombre());
+//		setModelo(registro.getModelo());
+//		setVersion(registro.getVersion()+"");
+//		setFechaCreacion(registro.getFechaCreacion().toString());
+//		
+//	}
+	
+
 
 }

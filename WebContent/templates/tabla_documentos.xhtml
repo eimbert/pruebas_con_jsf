@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form id="documentos">
+		<p:growl id="msgs" showDetail="true"/>
+		<p:panel id="panel" header="Documentos en edición" style="margin-bottom:10px;" >
+		
+			<p:dataTable  id="plt" var="plantilla" value="#{listDocsBean.plantillas}" editable="true" rows="5" 
+					paginator="true"
+                		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                		rowsPerPageTemplate="5,10,15" style="font-size: 13px">
+
+				<p:ajax event="rowEdit" listener="#{listDocsBean.onRowEdit}" update=":form:msgs" />
+       			<p:ajax event="rowEditCancel" listener="#{listDocsBean.onRowCancel}" update=":form:msgs" />
+       			<p:ajax event="sort" skipChildren="false" />
+				
+				<p:column headerText="Nombre" sortBy="#{plantilla.nombre}" style="text-align: left; width:24%;" >
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{plantilla.nombre}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{plantilla.nombre}" style="width:100%" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="Modelo" sortBy="#{plantilla.modelo}" style="text-align: left; width:18%;" >
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{plantilla.modelo}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{plantilla.modelo}" style="width:98%" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="Version" style="text-align: center; width:7%;">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{plantilla.version}" /></f:facet>
+						<f:facet name="input"><p:inputText value="#{plantilla.version}" style="width:98%" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="Fecha creación" sortBy="#{plantilla.fechaCreacion}" style="text-align: center; width:14%;">
+					<p:cellEditor>
+						<f:facet name="output"><h:outputText value="#{plantilla.fechaCreacion}" ><f:convertDateTime pattern="dd-MM-yyyy" /></h:outputText></f:facet>
+						<f:facet name="input"><p:calendar value="#{plantilla.fechaCreacion}" pattern="dd-MM-yyyy" mask="true" /></f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="Tipología"  style="text-align: center; width:14%;">
+						<h:outputText value="#{plantilla.idTipologia}" ></h:outputText>
+				</p:column>
+				
+				<p:column headerText="Usuario" sortBy="#{plantilla.usuario}" style="text-align: left; width:10%;">
+						<h:outputText value="#{plantilla.usuario}"  />
+				</p:column>
+								
+				<p:column style="width:3%">
+            		<p:rowEditor id="editReg"/>
+            		<p:tooltip id="toolTipedit" for="editReg" value="Editar los valores de los atributos" position="top"/>
+        		</p:column>
+        		<p:column style="width:5%">
+        			<p:commandButton id="editDocument" icon="pi pi-refresh" style="font-size: 1em"  action="#{menuController.optionPlantilla('rellenar')}" >
+        				<f:actionListener binding="#{menuController.setDocument(plantilla.getIdPlantilla())}" />
+        				<f:actionListener binding="#{listDocsBean.modificarPlantilla()}" update="@form"/>
+        			</p:commandButton>
+        			<p:tooltip id="toolTipNew" for="editDocument" value="Completar campos del documento" position="top"/>
+        		</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</html>
