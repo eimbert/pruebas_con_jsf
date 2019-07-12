@@ -26,6 +26,7 @@ import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
 import fr.opensagres.xdocreport.converter.ConverterRegistry;
 
 import fr.opensagres.xdocreport.core.document.DocumentKind;
+import funcionesWord.v2.FragmentoDelDocumento;
 
 public class WordReplaceTags {
 

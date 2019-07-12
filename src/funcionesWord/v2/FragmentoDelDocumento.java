@@ -1,4 +1,4 @@
-package funcionesWord;
+package funcionesWord.v2;
 
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 

@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import funcionesWord.Constants;
-import funcionesWord.FragmentoDelDocumento;
-import funcionesWord.TagWord;
 import lombok.Getter;
 import lombok.Setter;
 

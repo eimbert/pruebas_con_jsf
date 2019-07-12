@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import funcionesWord.Constants;
+import funcionesWord.v2.TagWord;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -27,7 +29,6 @@ import beans.PlantillaBean;
 import domain.PlantillaBO;
 import domain.PlantillaBaseBO;
 import domain.TagPlantillaBO;
-import funcionesWord.TagWord;
 import servicio.TagsSearchFunctionsImpl;
 import servicio.Interfaces.PlantillaBaseService;
 import servicio.Interfaces.PlantillaService;

@@ -23,6 +23,8 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
+import funcionesWord.v2.TagWord;
+
 
 public class WordGetTags {
 

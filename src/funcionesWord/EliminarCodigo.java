@@ -3,7 +3,7 @@ package funcionesWord;
 import java.util.ArrayList;
 import java.util.List;
 
-import funcionesWord.v2.LecturaDelDocumento;
+import funcionesWord.v2.FragmentoDelDocumento;
 
 public class EliminarCodigo{
 

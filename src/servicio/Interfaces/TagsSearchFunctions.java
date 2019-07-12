@@ -8,7 +8,7 @@ import javax.ejb.Local;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-import funcionesWord.TagWord;
+import funcionesWord.v2.TagWord;
 
 @Local
 public interface TagsSearchFunctions {

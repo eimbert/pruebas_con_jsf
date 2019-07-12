@@ -9,9 +9,10 @@ import javax.inject.Inject;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-import funcionesWord.TagWord;
 import funcionesWord.WordGetTags;
-import funcionesWord.v2.LecturaDelDocumento;
+import funcionesWord.v2.BuscarCamposEnDocumento;
+
+import funcionesWord.v2.TagWord;
 import servicio.Interfaces.TagsSearchFunctions;
 import funcionesWord.Constants; 
 
@@ -24,17 +25,10 @@ public class TagsSearchFunctionsImpl implements TagsSearchFunctions {
 	@Override
 	public int searchTags(String path, String name) throws FileNotFoundException, IOException, InvalidFormatException {
 		
-		LecturaDelDocumento documento = new LecturaDelDocumento();
-		documento.openDocument();
-		documento.leerParrafosEnTexto();
-		documento.leerParrafosEnTablas();
-		documento.tratarDocumento(Constants.CODIGO_INICIO, Constants.CODIGO_FINAL, "campo");
-		documento.escribirDocumento();
-		documento.saveDocument();
-		
-//		wordTags.setInPath(path);
-//		wordTags.setDocumentName(name);
-//		wordTags.searchTags();
+		BuscarCamposEnDocumento documento = new BuscarCamposEnDocumento();
+
+		documento.tratarDocumento(Constants.CODIGO_INICIO, Constants.CODIGO_FINAL);
+
 		return 0;
 	}
 

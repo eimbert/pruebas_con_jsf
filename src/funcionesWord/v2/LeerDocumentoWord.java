@@ -17,58 +17,39 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-import funcionesWord.FragmentoDelDocumento;
+
 import funcionesWord.Constants;
+import lombok.Getter;
+import lombok.Setter;
 
-public class LecturaDelDocumento {
+@Getter
+@Setter
+public abstract class LeerDocumentoWord {
 
-	private List<DatosEtiqueta> docFragmentado = new ArrayList<DatosEtiqueta>();
+	List<XWPFRun> runs = new ArrayList<XWPFRun>();
 	
 	private XWPFDocument document;
 	
-	public void tratarDocumento(String codInicio, String codFinal, String tipoEtiqueta) {
-		for(int indice = 0; indice < docFragmentado.size(); indice++) {
-			if(docFragmentado.get(indice).buscarCompleta(codInicio, codFinal)) {
-				docFragmentado.get(indice).setParrafoConEtiqueta(true);
-			}else {
-				if(!docFragmentado.get(indice).buscarInicioEtiqueta(codInicio)) {
-					docFragmentado.get(indice).setParrafoConEtiqueta(false);
-				}else {
-					boolean seEncuentreFinalEtiqueta = false;
-					String textoParcialParrafo = "";
-					int auxInd = indice;
-					do {
-						seEncuentreFinalEtiqueta = docFragmentado.get(++indice).buscarFinalEtiqueta(codFinal);
-						docFragmentado.get(indice).setEliminarParrafo(true);
-						textoParcialParrafo += docFragmentado.get(indice).getDocFragment().getTextoParrafo();
-					}while(seEncuentreFinalEtiqueta==false && indice <  docFragmentado.size() && !textoParcialParrafo.contains(codFinal));
-					docFragmentado.get(auxInd).juntarTexto(textoParcialParrafo);
-					docFragmentado.get(auxInd).setParrafoConEtiqueta(true);
-				}
-			}
-		}
-	}
-	
-	public void leerParrafosEnTexto() {
+	protected void leerParrafosEnTexto() {
 		for (XWPFParagraph p : document.getParagraphs()) 
 			for (XWPFRun r : p.getRuns()) 
 				if(r!=null && r.getText(0)!=null)
-					docFragmentado.add(new DatosEtiqueta(new FragmentoDelDocumento(r)));
+					runs.add(r);
 	}
 	
 	
-	public void leerParrafosEnTablas() {
+	protected void leerParrafosEnTablas() {
 		for (XWPFTable tbl : document.getTables())
 			for (XWPFTableRow row : tbl.getRows())
 				for (XWPFTableCell cell : row.getTableCells())
 					for (XWPFParagraph p : cell.getParagraphs())
 						for (XWPFRun r : p.getRuns())
 							if(r!=null && r.getText(0)!=null)
-								docFragmentado.add(new DatosEtiqueta(new FragmentoDelDocumento(r)));
+								runs.add(r);
 							
 	}
 	
-	public void escribirDocumento() {
+	protected void escribirDocumento(List<DatosEtiqueta> docFragmentado) {
 		docFragmentado.stream().forEach(parrafo -> {
 			if(parrafo.getEliminarParrafo()==false)
 				if(parrafo.getParrafoConEtiqueta()==true)
@@ -76,11 +57,11 @@ public class LecturaDelDocumento {
 				else
 					parrafo.getDocFragment().escribirParrafo();	
 			else 
-				parrafo.getDocFragment().escribirParrafo("");	
+				(parrafo).getDocFragment().escribirParrafo("");	
 		});
 	}
 	
-	public void openDocument() throws FileNotFoundException, IOException, InvalidFormatException {
+	protected  void openDocument() throws FileNotFoundException, IOException, InvalidFormatException {
 		File filename = new File(Constants.IN_PATH + File.separator + Constants.TEST_DOCUMENT_NAME);
 		InputStream is = new FileInputStream(filename);
 		OPCPackage oPackage = OPCPackage.open(is);
@@ -94,5 +75,35 @@ public class LecturaDelDocumento {
 		fileOutput.close();
 		document.close();
 	}
-
+	
+	protected void cerrarDocumento() throws IOException {
+		document.close();
+	}
+	
+	protected Boolean buscarCompleta(String texto, String codInicio, String codFinal) {
+		if(texto!=null) {
+			if(texto.contains(codInicio) && texto.contains(codFinal)) {
+				return true; //busqueda completa 
+			}
+		}
+		return false; //se deberá hacer una busqueda parcial
+	}
+	
+	protected Boolean buscarInicioEtiqueta(String texto, String codInicio) {
+		if(texto!=null) {
+			if(texto.contains(codInicio)) {
+				return true; //contiene inicio
+			}
+		}
+		return false; //parrafo sin etiqueta
+	}
+	
+	protected Boolean buscarFinalEtiqueta(String texto, String codFinal) {
+		if(texto!=null) {
+			if(texto.contains(codFinal)) {
+				return true; //contiene final
+			}
+		}
+		return false; //parrafo sin etiqueta
+	}
 }
