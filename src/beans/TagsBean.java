@@ -25,7 +25,7 @@ import beans.Controllers.CumplimentarController;
 import beans.Controllers.MenuController;
 import domain.Documento;
 import domain.TagPlantillaBO;
-import funcionesWord.Constants;
+import funcionesWord.v2.Constants;
 import lombok.Getter;
 import lombok.Setter;
 

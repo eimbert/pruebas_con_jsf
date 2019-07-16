@@ -14,6 +14,6 @@ import funcionesWord.v2.TagWord;
 public interface TagsSearchFunctions {
 	
 	public int searchTags(String path, String name) throws FileNotFoundException, IOException, InvalidFormatException;
-	public Map<String, List<TagWord>> getTags();
+	public List<TagWord> getTags();
 	
 }

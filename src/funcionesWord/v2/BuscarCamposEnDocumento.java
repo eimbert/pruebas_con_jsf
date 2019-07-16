@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import funcionesWord.Constants;
+
 import lombok.Getter;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -14,7 +14,7 @@ public class BuscarCamposEnDocumento extends LeerDocumentoWord {
 	@Getter
 	private List<TagWord> etiquetas = new ArrayList<TagWord>();
 	
-	public void tratarDocumento(String codInicio, String codFinal) throws FileNotFoundException, InvalidFormatException, IOException {
+	public void buscarLasEtiquetas(String codInicio, String codFinal) throws FileNotFoundException, InvalidFormatException, IOException {
 	 this.openDocument();
 	 this.leerParrafosEnTexto();
 	 this.leerParrafosEnTablas();
@@ -29,12 +29,12 @@ public class BuscarCamposEnDocumento extends LeerDocumentoWord {
 					do {
 						seEncuentreFinalEtiqueta = buscarFinalEtiqueta(runs.get(++indice).getText(0), codFinal);
 						textoParcialParrafo += runs.get(indice).getText(0);
-					}while(seEncuentreFinalEtiqueta==false && indice <  runs.size() && !textoParcialParrafo.contains(codFinal));
+					}while(seEncuentreFinalEtiqueta==false && indice <  runs.size()-1 && !textoParcialParrafo.contains(codFinal));
 					etiquetas.add(infoEtiquetas(textoParcialParrafo, codInicio, codFinal));
 				}
 			}
 		}
-		
+		this.closeDocumento();
 	}
 	
 	private TagWord infoEtiquetas(String txt, String codInicio, String codFinal) {
@@ -50,12 +50,9 @@ public class BuscarCamposEnDocumento extends LeerDocumentoWord {
 		auxTag.setTipoCampo(etiqueta.substring(0, (etiqueta.indexOf(Constants.CODIGO_SEPARADOR))));
 		etiqueta = etiqueta.substring(etiqueta.indexOf(Constants.CODIGO_SEPARADOR)+1);
 
-		auxTag.setTextoSolicitud( etiqueta.substring(0, (etiqueta.indexOf(Constants.CODIGO_SEPARADOR))));
-		etiqueta = etiqueta.substring(etiqueta.indexOf(Constants.CODIGO_SEPARADOR)+1);
+		auxTag.setTextoSolicitud( etiqueta.substring(0, (etiqueta.indexOf(codFinal))));
+		//etiqueta = etiqueta.substring(etiqueta.indexOf(Constants.CODIGO_SEPARADOR)+1);
 		
 		return  auxTag;
-		
 	}
-	
-	
 }

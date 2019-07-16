@@ -9,9 +9,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import funcionesWord.Constants;
+
 import domain.Documento;
 import domain.PlantillaBO;
+import funcionesWord.v2.Constants;
 import servicio.Interfaces.DocumentoService;
 import servicio.Interfaces.PlantillaService;
 import servicio.Interfaces.WordReplaceService;

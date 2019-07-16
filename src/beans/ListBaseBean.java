@@ -25,7 +25,7 @@ import beans.Controllers.MenuController;
 import domain.PlantillaBO;
 import domain.PlantillaBaseBO;
 import domain.TagPlantillaBO;
-import funcionesWord.Constants;
+import funcionesWord.v2.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import servicio.Interfaces.PlantillaBaseService;

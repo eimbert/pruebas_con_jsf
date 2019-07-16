@@ -22,8 +22,9 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-import funcionesWord.Constants;
+
 import funcionesWord.ToPDF;
+import funcionesWord.v2.Constants;
 import domain.Documento;
 import lombok.Getter;
 import lombok.Setter;

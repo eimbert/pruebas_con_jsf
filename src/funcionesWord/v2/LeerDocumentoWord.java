@@ -18,7 +18,6 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
-import funcionesWord.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -49,18 +48,6 @@ public abstract class LeerDocumentoWord {
 							
 	}
 	
-	protected void escribirDocumento(List<DatosEtiqueta> docFragmentado) {
-		docFragmentado.stream().forEach(parrafo -> {
-			if(parrafo.getEliminarParrafo()==false)
-				if(parrafo.getParrafoConEtiqueta()==true)
-					parrafo.getDocFragment().escribirParrafo("[AQUÍ ETIQUETA]");	//Escribir el contenido de la etiqueta
-				else
-					parrafo.getDocFragment().escribirParrafo();	
-			else 
-				(parrafo).getDocFragment().escribirParrafo("");	
-		});
-	}
-	
 	protected  void openDocument() throws FileNotFoundException, IOException, InvalidFormatException {
 		File filename = new File(Constants.IN_PATH + File.separator + Constants.TEST_DOCUMENT_NAME);
 		InputStream is = new FileInputStream(filename);
@@ -76,7 +63,7 @@ public abstract class LeerDocumentoWord {
 		document.close();
 	}
 	
-	protected void cerrarDocumento() throws IOException {
+	protected void closeDocumento() throws IOException {
 		document.close();
 	}
 	

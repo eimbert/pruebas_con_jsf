@@ -15,7 +15,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import funcionesWord.Constants;
+
+import funcionesWord.v2.Constants;
 import funcionesWord.v2.TagWord;
 
 import javax.faces.bean.ManagedBean;
